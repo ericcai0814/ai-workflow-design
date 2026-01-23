@@ -13,6 +13,39 @@ last_updated: "2026-01-23"
 
 ---
 
+## [1.1.0] - 2026-01-23
+
+### 新增
+
+- **整合機制**
+  - `AGENTS.md` — AI Agent 總入口（類似 OpenSpec 模式）
+  - `SETUP.md` — AI 設置指南，自動分析技術棧並配置
+  - `CLAUDE.template.md` — CLAUDE.md 模板，手動設置用
+
+- **14 個獨立 Prompt 文件**
+  - 01-planning/prompts/: analyze-requirements.md, create-plan.md
+  - 02-development/frontend/prompts/: 5 個（design-system, token, component, routing, state）
+  - 02-development/backend/prompts/: 3 個（api, model, auth）
+  - 02-development/shared/prompts/: 3 個（feature, bug-fixing, integration-test）
+  - 03-review/prompts/: review-code.md
+
+- **成功案例**
+  - `case-01-claude-md-trigger-rules.md` — 強制讀取規則驗證記錄
+
+### 變更
+
+- 強化 CLAUDE.md 觸發規則為強制指令（「必須使用 Read 工具」）
+- 完善 `component-development.md`：新增 TL;DR、使用場景、常見問題
+
+### 驗證
+
+- 在 ewill-web 專案完成三場景驗證：
+  - ✅ 元件開發 → 讀取 component-development.md
+  - ✅ API 設計 → 讀取 api-design.md
+  - ✅ 問題排查 → 讀取 pitfalls/*.md
+
+---
+
 ## [1.0.0] - 2026-01-23
 
 ### 新增
