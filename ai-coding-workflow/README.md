@@ -1,7 +1,7 @@
 ---
 title: "AI Coding Workflow Documentation"
 id: "ai-coding-workflow-root"
-version: "0.2.0"
+version: "1.1.1"
 last_updated: "2026-01-23"
 ---
 
@@ -19,15 +19,36 @@ AI Coding Workflow 是一個**可分發的工具**，讓團隊的 AI Agent（Cla
 
 ### 導入到你的專案
 
-```bash
-# 1. 複製 ai-coding-workflow/ 目錄到你的專案
-cp -r ai-coding-workflow/ /path/to/your-project/
+#### 方式一：使用 degit（推薦）
 
-# 2. 讓 AI 設置（推薦）
+[degit](https://github.com/Rich-Harris/degit) 可以直接複製 Git repo 的特定目錄，不含 git 歷史。
+
+```bash
+# 1. 安裝 degit（如果還沒有）
+npm install -g degit
+
+# 2. 複製 ai-coding-workflow 到你的專案
+cd /path/to/your-project
+degit ericcai/ai-workflow-design/ai-coding-workflow ai-coding-workflow
+
+# 3. 讓 AI 設置（推薦）
 #    告訴 AI：「請閱讀 ai-coding-workflow/SETUP.md 並設置到這個專案」
 
-# 3. 或手動設置
+# 4. 或手動設置
 #    複製 CLAUDE.template.md 的內容到你專案的 CLAUDE.md
+```
+
+#### 方式二：手動複製
+
+```bash
+# 1. Clone 整個 repo
+git clone https://github.com/ericcai/ai-workflow-design.git
+
+# 2. 複製 ai-coding-workflow/ 到你的專案
+cp -r ai-workflow-design/ai-coding-workflow/ /path/to/your-project/
+
+# 3. 刪除 clone 的 repo（可選）
+rm -rf ai-workflow-design
 ```
 
 ### 入口文件
@@ -186,6 +207,9 @@ last_updated: "YYYY-MM-DD"
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 1.1.1 | 2026-01-23 | 新增 degit 安裝說明 |
+| 1.1.0 | 2026-01-23 | 新增整合機制、14 個 Prompt 文件、成功案例 |
+| 1.0.0 | 2026-01-23 | 完整架構：規劃、開發、審核、附錄、模板 |
 | 0.1.0 | 2026-01-23 | MVP：目錄結構、README、design-system、踩坑案例 |
 
 ---

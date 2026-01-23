@@ -1,7 +1,7 @@
 ---
 title: "變更記錄"
 id: "changelog"
-version: "1.0.0"
+version: "1.1.1"
 last_updated: "2026-01-23"
 ---
 
@@ -10,6 +10,16 @@ last_updated: "2026-01-23"
 所有重要變更都會記錄在此文件中。
 
 格式基於 [Keep a Changelog](https://keepachangelog.com/zh-TW/1.0.0/)。
+
+---
+
+## [1.1.1] - 2026-01-23
+
+### 新增
+
+- **安裝說明**
+  - 在 README.md 加入 degit 安裝方式（推薦）
+  - 保留手動複製方式作為備選
 
 ---
 
