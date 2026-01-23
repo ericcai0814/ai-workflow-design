@@ -114,7 +114,25 @@ Read(/Users/.../component-development.md)
 ⎿ Read 301 lines
 ```
 
+## 完整驗證記錄
+
+### 驗證日期：2026-01-23
+
+| 場景 | 測試輸入 | 預期行為 | 實際行為 | 結果 |
+|------|----------|----------|----------|------|
+| 元件開發 | 「請幫我建立一個新的 UI 元件」 | 讀取 component-development.md | AI 說「根據專案的強制讀取規則」並執行 Read | ✅ |
+| API 設計 | 「請幫我設計一個新的 API」 | 讀取 api-design.md | AI 說「根據專案的強制讀取規則」並執行 Read | ✅ |
+| 問題排查 | 「我的 API 部署到 Vercel 後回傳 404」 | 讀取 pitfalls/*.md | AI 搜尋並讀取 case-03-vercel-api-404.md，提供完整解決方案 | ✅ |
+
+### 驗證結論
+
+強制讀取規則在所有測試場景都有效。關鍵成功因素：
+1. 使用「必須」而非「請」
+2. 明確指定「使用 Read 工具」
+3. 提供完整的檔案路徑
+
 ## 相關資源
 
 - 修正後的模板：`ai-coding-workflow/CLAUDE.template.md`
 - 測試專案：ewill-web
+- 驗證日期：2026-01-23
