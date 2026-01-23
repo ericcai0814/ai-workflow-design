@@ -1,44 +1,77 @@
 ---
 title: "AI Coding Workflow Documentation"
 id: "ai-coding-workflow-root"
-version: "0.1.0"
+version: "0.2.0"
 last_updated: "2026-01-23"
 ---
 
-# AI Coding Workflow Documentation
+# AI Coding Workflow
 
-> AI-First 的全棧開發工作流程文件系統
+> 給軟體團隊的 AI Agent 使用的標準化開發工作流程系統
+
+## What is this?
+
+AI Coding Workflow 是一個**可分發的工具**，讓團隊的 AI Agent（Claude Code、Cursor 等）能夠依照團隊通用的最佳實踐來開發。
+
+**類似於**：OpenSpec 管理變更提案，AI Coding Workflow 管理開發流程。
+
+## Quick Start
+
+### 導入到你的專案
+
+```bash
+# 1. 複製 ai-coding-workflow/ 目錄到你的專案
+cp -r ai-coding-workflow/ /path/to/your-project/
+
+# 2. 讓 AI 設置（推薦）
+#    告訴 AI：「請閱讀 ai-coding-workflow/SETUP.md 並設置到這個專案」
+
+# 3. 或手動設置
+#    複製 CLAUDE.template.md 的內容到你專案的 CLAUDE.md
+```
+
+### 入口文件
+
+| 文件 | 用途 | 讀者 |
+|------|------|------|
+| `AGENTS.md` | AI 總入口，說明如何使用這個系統 | AI Agent |
+| `SETUP.md` | 設置指南，說明如何導入到專案 | AI Agent |
+| `CLAUDE.template.md` | CLAUDE.md 模板，手動設置用 | 人類工程師 |
+| `QUICKSTART.md` | 快速開始指南 | 人類 + AI |
 
 ## Quick Navigation
 
 ```
 你是什麼角色？需要做什麼？
 │
-├─ AI Agent（開始新任務）
-│   └─ 閱讀本文件 → 根據任務類型選擇對應目錄
+├─ AI Agent
+│   ├─ 設置到專案 → SETUP.md
+│   └─ 開始工作 → AGENTS.md
 │
-├─ 前端工程師
+├─ 人類工程師
+│   ├─ 導入到專案 → 複製目錄 + CLAUDE.template.md
+│   └─ 了解系統 → QUICKSTART.md
+│
+├─ 前端開發
 │   └─ 02-development/frontend/design-system.md → 設計系統
-│   └─ 02-development/frontend/ → 元件、狀態、路由
 │
-├─ 後端工程師
+├─ 後端開發
 │   └─ 02-development/backend/api-design.md → API 設計
-│   └─ 02-development/backend/ → 資料庫、認證
 │
-├─ 遇到問題
-│   └─ appendix/pitfalls/ → 踩坑案例
-│
-└─ 學習最佳實踐
-    └─ appendix/success-cases/ → 成功案例
-    └─ appendix/sessions/ → 精選 AI 對話
+└─ 遇到問題
+    └─ appendix/pitfalls/ → 踩坑案例
 ```
 
 ## Directory Structure
 
 ```
 ai-coding-workflow/
-├── README.md                 # ← 你在這裡（AI 入口點）
+├── AGENTS.md                 # AI 總入口
+├── SETUP.md                  # 設置指南（給 AI）
+├── CLAUDE.template.md        # CLAUDE.md 模板（給人類）
+├── README.md                 # ← 你在這裡
 ├── QUICKSTART.md             # 快速開始指南
+├── DESIGN.md                 # 技術設計文件
 │
 ├── 01-planning/              # 規劃階段
 │   ├── requirement-analysis.md
