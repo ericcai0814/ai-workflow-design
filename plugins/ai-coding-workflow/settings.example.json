@@ -16,8 +16,8 @@
   "extraKnownMarketplaces": {
     "ai-coding-workflow": {
       "source": {
-        "source": "github",
-        "repo": "ericcai0814/ai-workflow-design",
+        "source": "git",
+        "url": "https://github.com/ericcai0814/ai-workflow-design.git",
         "path": "plugins"
       }
     }
