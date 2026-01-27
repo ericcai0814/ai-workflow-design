@@ -1,0 +1,48 @@
+{
+  "name": "ai-coding-workflow",
+  "description": "團隊標準化 AI 輔助開發工作流程。涵蓋規劃、前端、後端、驗證、審查等完整開發週期。",
+  "version": "1.0.0",
+  "author": {
+    "name": "Eric Cai",
+    "email": "d4070707@gmail.com"
+  },
+  "homepage": "https://github.com/ericcai0814/ai-workflow-design",
+  "repository": "https://github.com/ericcai0814/ai-workflow-design",
+  "license": "MIT",
+  "keywords": [
+    "workflow",
+    "frontend",
+    "backend",
+    "planning",
+    "code-review",
+    "design-system",
+    "api-design",
+    "hooks",
+    "security"
+  ],
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/sensitive-file-guard.js",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node ${CLAUDE_PLUGIN_ROOT}/hooks/markdown-lint.js"
+          }
+        ]
+      }
+    ]
+  }
+}
