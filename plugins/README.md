@@ -8,37 +8,14 @@
 | ------------------------------------------- | ------------------------------ |
 | [ai-coding-workflow](./ai-coding-workflow/) | 團隊標準化 AI 輔助開發工作流程 |
 
-## 安裝 Marketplace
+## 安裝
 
 ```bash
-/plugin marketplace add ericcai0814/ai-workflow-design/plugins
-```
+# 1. 添加 marketplace
+/plugin marketplace add https://github.com/ericcai0814/ai-workflow-design.git
 
-## 安裝插件
-
-```bash
+# 2. 安裝插件
 /plugin install ai-coding-workflow@ai-coding-workflow
-```
-
-## 團隊配置
-
-在專案的 `.claude/settings.json` 中添加以下配置，團隊成員開啟專案時會自動提示安裝：
-
-```json
-{
-  "extraKnownMarketplaces": {
-    "ai-coding-workflow": {
-      "source": {
-        "source": "git",
-        "url": "https://github.com/ericcai0814/ai-workflow-design.git",
-        "path": "plugins"
-      }
-    }
-  },
-  "enabledPlugins": {
-    "ai-coding-workflow@ai-coding-workflow": true
-  }
-}
 ```
 
 ## 管理插件
