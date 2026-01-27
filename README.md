@@ -37,10 +37,10 @@
 
 ```
 .
-├── plugins/                          # Claude Code Plugin
-│   ├── .claude-plugin/
-│   │   └── marketplace.json
-│   └── ai-coding-workflow/
+├── .claude-plugin/
+│   └── marketplace.json              # Marketplace 定義
+├── plugins/
+│   └── ai-coding-workflow/           # Plugin 內容
 │       ├── .claude-plugin/
 │       │   └── plugin.json           # Plugin 元數據 + Hooks
 │       ├── skills/
