@@ -22,10 +22,10 @@
 
 ### Hooks
 
-| Hook                      | 階段        | 描述                                             |
-| ------------------------- | ----------- | ------------------------------------------------ |
-| `sensitive-file-guard.js` | PreToolUse  | 阻止修改敏感檔案（.env, credentials, keys）      |
-| `markdown-lint.js`        | PostToolUse | Markdown 格式檢查（YAML Front Matter, 標題層級） |
+| Hook                      | 階段        | 描述                                              |
+| ------------------------- | ----------- | ------------------------------------------------- |
+| `sensitive-file-guard.js` | PreToolUse  | 阻止讀取或修改敏感檔案（.env, credentials, keys） |
+| `markdown-lint.js`        | PostToolUse | Markdown 格式檢查（YAML Front Matter, 標題層級）  |
 
 ### 觸發關鍵字
 

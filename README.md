@@ -79,10 +79,10 @@ npx degit ericcai0814/ai-workflow-design/plugins/ai-coding-workflow/skills/ai-co
 
 ### Hooks - 自動防護
 
-| Hook                      | 階段        | 功能                                             |
-| ------------------------- | ----------- | ------------------------------------------------ |
-| `sensitive-file-guard.js` | PreToolUse  | 阻止修改敏感檔案（.env, credentials, keys）      |
-| `markdown-lint.js`        | PostToolUse | Markdown 格式檢查（YAML Front Matter, 標題層級） |
+| Hook                      | 階段        | 功能                                              |
+| ------------------------- | ----------- | ------------------------------------------------- |
+| `sensitive-file-guard.js` | PreToolUse  | 阻止讀取或修改敏感檔案（.env, credentials, keys） |
+| `markdown-lint.js`        | PostToolUse | Markdown 格式檢查（YAML Front Matter, 標題層級）  |
 
 ---
 
