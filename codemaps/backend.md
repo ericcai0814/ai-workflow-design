@@ -8,11 +8,18 @@
 此專案沒有傳統後端服務，但有以下功能性程式碼：
 
 ```
-├── plugins/ai-coding-workflow/hooks/
-│   ├── sensitive-file-guard.js   # PreToolUse Hook
-│   └── markdown-lint.js          # PostToolUse Hook
-└── scripts/
-    └── init-claude.js            # 初始化腳本
+plugins/ai-coding-workflow/
+├── hooks/
+│   └── hooks.json                    # Hook 註冊配置
+├── scripts/
+│   └── hooks/
+│       ├── sensitive-file-guard.js   # PreToolUse Hook
+│       └── markdown-lint.js          # PostToolUse Hook
+└── skills/ai-coding-workflow/
+    └── scripts/
+        ├── create-component.sh       # 元件建立腳本
+        ├── create-dbml.sh            # DBML 資料庫定義腳本
+        └── run-tests.sh              # 測試執行腳本
 ```
 
 ## Hooks
@@ -29,15 +36,16 @@ stdin (JSON) → 解析 file_path → 檢查敏感模式 → exit 0 (允許) / e
 ```
 
 **敏感檔案模式：**
-| Pattern | Example |
-|---------|---------|
-| `.env*` | .env, .env.local, .env.production |
-| `credentials*` | credentials.json |
-| `secrets*` | secrets.yaml |
-| `*.pem`, `*.key` | server.pem, private.key |
-| `.ssh/*` | .ssh/id_rsa |
 
-**Location:** `plugins/ai-coding-workflow/hooks/sensitive-file-guard.js:20-32`
+| Pattern          | Example                           |
+| ---------------- | --------------------------------- |
+| `.env*`          | .env, .env.local, .env.production |
+| `credentials*`   | credentials.json                  |
+| `secrets*`       | secrets.yaml                      |
+| `*.pem`, `*.key` | server.pem, private.key           |
+| `.ssh/*`         | .ssh/id_rsa                       |
+
+**Location:** `plugins/ai-coding-workflow/scripts/hooks/sensitive-file-guard.js:20-32`
 
 ### markdown-lint.js
 
@@ -50,34 +58,70 @@ stdin (JSON) → 解析 file_path → 檢查敏感模式 → exit 0 (允許) / e
 - YAML Front Matter 格式
 - 標題層級正確性
 
-**Location:** `plugins/ai-coding-workflow/hooks/markdown-lint.js`
+**Location:** `plugins/ai-coding-workflow/scripts/hooks/markdown-lint.js`
 
-## Scripts
+## Skill Scripts
 
-### init-claude.js
+位於 `plugins/ai-coding-workflow/skills/ai-coding-workflow/scripts/`
 
-**Purpose:** 初始化 Claude Code 本地設定
+### create-component.sh
 
-```
-Flow:
-讀取 .claude/settings.example.json
-       ↓
-替換 $PWD → 實際專案路徑
-       ↓
-寫入 .claude/settings.local.json
-```
+**Purpose:** 建立 React 元件檔案結構
 
 **Usage:**
 
 ```bash
-node scripts/init-claude.js
+./create-component.sh ComponentName
 ```
 
-**Location:** `scripts/init-claude.js:18-49`
+**生成檔案：**
+
+```
+src/components/ComponentName/
+├── ComponentName.tsx       # 主元件（含 Props interface）
+├── ComponentName.test.tsx  # 測試檔案
+└── index.ts                # 匯出入口
+```
+
+### create-dbml.sh
+
+**Purpose:** 建立 DBML 資料庫定義檔
+
+**Usage:**
+
+```bash
+./create-dbml.sh table_name
+```
+
+**生成檔案：**
+
+```
+database/table_name.dbml
+```
+
+**預設欄位：** `id` (uuid pk), `created_at`, `updated_at`
+
+### run-tests.sh
+
+**Purpose:** 自動偵測並執行測試
+
+**Usage:**
+
+```bash
+./run-tests.sh [test-pattern]
+```
+
+**支援框架：**
+
+| 專案類型         | 偵測方式                              | 執行命令         |
+| ---------------- | ------------------------------------- | ---------------- |
+| Node.js (Vitest) | `package.json` 含 vitest              | `npx vitest run` |
+| Node.js (Jest)   | `package.json` 含 jest                | `npx jest`       |
+| Python           | `requirements.txt` / `pyproject.toml` | `pytest`         |
 
 ## Hook Registration
 
-Hooks 在 `plugins/ai-coding-workflow/.claude-plugin/plugin.json` 註冊：
+Hooks 在 `plugins/ai-coding-workflow/hooks/hooks.json` 註冊：
 
 ```json
 {
@@ -103,6 +147,8 @@ Hooks 在 `plugins/ai-coding-workflow/.claude-plugin/plugin.json` 註冊：
   }
 }
 ```
+
+**Note:** `${CLAUDE_PLUGIN_ROOT}` 指向 `plugins/ai-coding-workflow/scripts/`
 
 ## Related Codemaps
 
