@@ -19,6 +19,5 @@
     "api-design",
     "hooks",
     "security"
-  ],
-  "hooks": "./hooks/hooks.json"
+  ]
 }
