@@ -1,0 +1,293 @@
+schema: spec-driven
+
+# Project context - shown to AI when creating artifacts
+context: |
+  # AI Coding Workflow Documentation System
+
+  為 AI Agent 設計的全棧開發工作流程文件系統。
+
+  ## 專案定位
+  - 主要讀者：AI Agent（Claude Code、Cursor、GitHub Copilot）
+  - 次要讀者：前後端工程師
+  - 核心價值：標準化 AI 輔助開發流程，減少踩坑，提升開發效率
+
+  ## 設計原則
+  1. AI-First：文件結構、語法、格式皆以 AI 可解析為優先考量
+  2. 技術棧無關：流程通用，具體實作以變數表示
+  3. 模組化設計：每個文件獨立完整，可單獨引用
+  4. 可執行導向：包含可直接使用的 Prompt 範本
+
+  ## Tech Stack
+  - 文件格式：Markdown（GitHub Flavored）
+  - 元資料：YAML Front Matter
+  - 變數系統：${VARIABLE_NAME} 語法
+  - 技術棧：技術棧無關（通用流程）
+
+  ## 目錄結構
+  ```
+  /ai-coding-workflow/
+  ├── README.md                 # AI 入口點（必讀）
+  ├── QUICKSTART.md             # 快速開始指南
+  ├── 01-planning/              # 規劃階段
+  │   ├── requirement-analysis.md
+  │   ├── tech-stack-selection.md
+  │   └── architecture-design.md
+  ├── 02-development/           # 開發階段
+  │   ├── frontend/             # 前端開發（技術棧無關）
+  │   │   ├── design-system.md  # 設計系統（核心基礎）
+  │   │   ├── component-development.md
+  │   │   ├── state-management.md
+  │   │   ├── routing.md
+  │   │   └── prompts/          # 前端 Prompt 範本
+  │   ├── backend/              # 後端開發（技術棧無關）
+  │   │   ├── api-design.md
+  │   │   ├── database.md
+  │   │   ├── authentication.md
+  │   │   ├── business-logic.md
+  │   │   └── prompts/          # 後端 Prompt 範本
+  │   └── shared/               # 共用流程
+  │       ├── validation-framework.md
+  │       ├── integration.md
+  │       └── testing.md
+  ├── 03-review/                # 審核階段
+  │   ├── code-review.md
+  │   ├── security-review.md
+  │   └── performance-review.md
+  ├── appendix/                 # 附錄
+  │   ├── pitfalls/             # 踩坑案例
+  │   ├── success-cases/        # 成功案例
+  │   ├── sessions/             # 精選對話
+  │   ├── tech-stack-examples/  # 技術棧參考實作
+  │   └── prompt-cheatsheet.md  # Prompt 速查表
+  └── templates/                # 可複製模板
+  ```
+
+  ## 前後端分離原則
+  | 目錄       | 負責範圍                           | 不包含           |
+  |------------|-----------------------------------|------------------|
+  | frontend/  | UI/UX、元件、狀態、路由、樣式      | 資料庫、認證邏輯  |
+  | backend/   | API、資料庫、認證、商業邏輯、中間件 | UI 元件、樣式    |
+  | shared/    | 驗證框架、整合測試、E2E、共用工具   | 特定前後端邏輯   |
+
+  ## AI Agent 使用情境
+  1. 新專案啟動：從 README.md 開始，依序閱讀規劃階段文件
+  2. 開發特定功能：直接跳轉到對應的 development 文件
+  3. 遇到問題：查閱 appendix/pitfalls/ 尋找類似案例
+  4. 學習最佳實踐：參考 appendix/success-cases/ 和 sessions/
+
+  ## 參考標準
+  - Conventional Commits (https://www.conventionalcommits.org/)
+  - Semantic Versioning (https://semver.org/)
+  - CommonMark (https://commonmark.org/)
+
+  ## 相容性目標
+  - Claude Code (Anthropic)
+  - Cursor
+  - GitHub Copilot
+  - 其他支援 Markdown 的 AI 編輯器
+
+# Per-artifact rules for OpenSpec workflow
+rules:
+  proposal:
+    - 使用 ${VARIABLE_NAME} 語法表示技術棧變數
+    - 不綁定特定技術棧，使用變數而非硬編碼
+    - 保持模組化：每個文件獨立完整
+
+  specs:
+    - 所有 spec 文件必須包含 YAML Front Matter
+    - 必填欄位：title, id, category, version, last_updated
+    - development 階段必填 subcategory (frontend|backend|shared)
+    - ai_usage 欄位列出適用場景
+
+  design:
+    - 明確的角色設定：清楚說明 AI 應扮演的角色
+    - 具體的輸出格式：指定期望的回應結構
+    - 邊界條件處理：說明特殊情況的處理方式
+    - 可驗證的結果：提供檢查清單或驗收標準
+
+  tasks:
+    - 每個 Prompt 需附帶至少一個使用範例
+    - 變數需有預設值或說明
+    - 任務應可獨立執行並驗證
+
+# Conventions for file naming, variables, and git workflow
+conventions:
+  file_naming:
+    general: "kebab-case.md (e.g., component-development.md)"
+    prompt: "##-description.md (e.g., 01-setup-project.md)"
+    case: "case-##-description.md (e.g., case-01-form-validation.md)"
+    session: "session-##-description.md (e.g., session-01-auth-flow.md)"
+
+  variables:
+    syntax: "${VARIABLE_NAME}"
+    naming: "全大寫，底線分隔"
+    common:
+      - "${FRAMEWORK} - 前端框架（React, Vue, Angular）"
+      - "${LANGUAGE} - 程式語言（TypeScript, JavaScript）"
+      - "${CSS_SOLUTION} - CSS 方案（Tailwind, CSS Modules）"
+      - "${STATE_MANAGER} - 狀態管理（Redux, Zustand, Pinia）"
+      - "${API_STYLE} - API 風格（REST, GraphQL, tRPC）"
+      - "${DATABASE} - 資料庫（PostgreSQL, MongoDB）"
+      - "${ORM} - ORM 工具（Prisma, Drizzle, TypeORM）"
+
+  yaml_front_matter:
+    required_fields:
+      - title
+      - id
+      - category
+      - version
+      - last_updated
+    conditional_fields:
+      subcategory: "development 階段必填 (frontend|backend|shared)"
+    optional_fields:
+      - ai_usage
+
+  git:
+    commit_format: "<type>(<scope>): <description>"
+    types:
+      - "docs - 文件變更"
+      - "feat - 新功能/新文件"
+      - "fix - 修正錯誤"
+      - "refactor - 重構（不影響功能）"
+      - "style - 格式調整"
+      - "chore - 維護性工作"
+    scopes:
+      - frontend
+      - backend
+      - shared
+      - planning
+      - review
+      - appendix
+    branches:
+      main: "穩定版本"
+      develop: "開發中版本"
+      feature: "feature/<name> - 新功能/新文件"
+      fix: "fix/<name> - 修正"
+
+# Constraints and validation rules
+constraints:
+  required:
+    - 不綁定特定技術棧：使用變數而非硬編碼
+    - 保持模組化：每個文件獨立完整
+    - 維持一致性：遵循命名和格式規範
+    - 向後相容：重大變更需標註版本
+
+  forbidden:
+    - 在流程文件中寫死技術棧
+    - 建立循環依賴的文件
+    - 使用未定義的變數
+    - 忽略 YAML Front Matter
+
+  testing:
+    - 所有文件必須通過 Markdown lint 檢查
+    - YAML Front Matter 必須符合 schema 定義
+    - 內部連結必須有效
+    - 變數使用必須一致
+
+# Maintenance configuration
+maintenance:
+  review_frequency: "quarterly"
+  review_items:
+    - 驗證所有文件連結有效
+    - 更新過時的 Prompt
+    - 整理新的踩坑案例
+    - 審核技術棧範例
+
+  versioning:
+    - 主版本號記錄在 README.md
+    - 每個文件獨立追蹤版本
+    - 重大變更需更新 CHANGELOG
+
+  contribution_paths:
+    pitfalls: "appendix/pitfalls/"
+    prompts: "更新對應文件"
+    tech_examples: "appendix/tech-stack-examples/"
+    process_improvements: "提出 OpenSpec change proposal"
+
+# Best practices for OpenSpec workflow
+best_practices:
+  simplicity_first:
+    default_approach:
+      - 預設 <100 行新增程式碼
+      - 優先單檔實作，直到證明不足
+      - 無明確理由不使用框架
+      - 選擇無聊但穩定的模式
+    complexity_triggers:
+      - 效能數據顯示當前方案過慢
+      - 具體規模需求（>1000 用戶、>100MB 資料）
+      - 多個已驗證的使用案例需要抽象
+
+  naming:
+    capability:
+      - "使用動詞-名詞格式：user-auth, payment-capture"
+      - "單一職責：每個 capability 只做一件事"
+      - "10 分鐘可理解：描述需要 AND 就該拆分"
+    change_id:
+      - "kebab-case，簡短描述：add-two-factor-auth"
+      - "動詞開頭：add-, update-, remove-, refactor-"
+      - "確保唯一：若重複則加 -2, -3"
+
+  references:
+    format: "file.ts:42"
+    specs: "specs/auth/spec.md"
+    changes: "關聯相關 changes 和 PRs"
+
+# Troubleshooting common OpenSpec errors
+troubleshooting:
+  common_errors:
+    - error: "Change must have at least one delta"
+      causes:
+        - "changes/[name]/specs/ 目錄不存在"
+        - "目錄內無 .md 檔案"
+        - "檔案缺少操作前綴（## ADDED Requirements）"
+      fix: "確保 specs/ 目錄存在且包含有效的 delta spec 檔案"
+
+    - error: "Requirement must have at least one scenario"
+      causes:
+        - "Scenario 未使用 #### 格式"
+        - "使用了 bullet point 或 bold 格式"
+      fix: "使用正確格式：#### Scenario: Name"
+
+    - error: "Silent scenario parsing failures"
+      causes:
+        - "格式偏差：需精確匹配 #### Scenario: Name"
+      fix: "使用 openspec show [change] --json --deltas-only 除錯"
+
+  validation_tips:
+    - "永遠使用 --strict 模式進行完整檢查"
+    - "使用 --json 輸出除錯 delta 解析"
+    - "檢查 requirement 時使用 openspec show [spec] --json -r 1"
+
+  scenario_format:
+    correct: |
+      #### Scenario: User login success
+      - **WHEN** valid credentials provided
+      - **THEN** return JWT token
+    wrong:
+      - "- **Scenario: User login** ❌ (bullet point)"
+      - "**Scenario**: User login ❌ (bold colon)"
+      - "### Scenario: User login ❌ (wrong heading level)"
+
+# Tool selection guide for AI agents
+tool_selection:
+  - task: "依模式搜尋檔案"
+    tool: "Glob"
+    reason: "快速模式匹配"
+  - task: "搜尋程式碼內容"
+    tool: "Grep"
+    reason: "優化的正則搜尋"
+  - task: "讀取特定檔案"
+    tool: "Read"
+    reason: "直接檔案存取"
+  - task: "探索未知範圍"
+    tool: "Task (Explore agent)"
+    reason: "多步驟調查"
+  - task: "列舉 specs"
+    tool: "openspec spec list --long"
+    reason: "結構化輸出"
+  - task: "列舉 changes"
+    tool: "openspec list"
+    reason: "活躍變更清單"
+  - task: "全文搜尋 specs"
+    tool: "rg -n 'Requirement:|Scenario:' openspec/specs"
+    reason: "ripgrep 效能最佳"

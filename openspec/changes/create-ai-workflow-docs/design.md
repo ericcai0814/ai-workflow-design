@@ -252,6 +252,6 @@ AI Agent 應在首次使用時詢問用戶：
 
 ## References
 
-- [openspec/project.md](../project.md) - 專案慣例定義
+- [openspec/config.yaml](../config.yaml) - 專案慣例定義
 - [Conventional Commits](https://www.conventionalcommits.org/)
 - [Diátaxis Documentation Framework](https://diataxis.fr/)
