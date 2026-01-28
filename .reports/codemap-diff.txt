@@ -1,0 +1,37 @@
+================================================================================
+CODEMAP DIFF REPORT
+Generated: 2026-01-28
+================================================================================
+
+SUMMARY
+-------
+Status: INITIAL CREATION
+Diff Percentage: 100% (no previous version)
+User Approval: GRANTED
+
+FILES CREATED
+-------------
+[NEW] codemaps/architecture.md    - Overall architecture, module relationships
+[NEW] codemaps/backend.md         - Hooks, Scripts (functional code)
+[NEW] codemaps/frontend.md        - Skills, Commands (user-facing interfaces)
+[NEW] codemaps/data.md            - JSON/YAML configs, schemas
+
+STATISTICS
+----------
+Total Files Analyzed: 76
+  - Markdown files: 68
+  - JavaScript files: 3
+  - JSON configs: 4
+  - YAML configs: 1
+
+Codemap Coverage:
+  - architecture.md: Project structure, module relationships, entry points
+  - backend.md: 2 hooks (sensitive-file-guard, markdown-lint), 1 script
+  - frontend.md: 1 skill (ai-coding-workflow), 10 OpenSpec skills, 10 commands
+  - data.md: 4 config files, variable system, YAML schema
+
+NEXT SCHEDULED UPDATE
+---------------------
+Recommended: After significant structural changes or new modules added
+
+================================================================================
