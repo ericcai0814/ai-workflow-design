@@ -138,6 +138,43 @@
 
 ---
 
+### Requirement: Git Workflow Guidelines
+
+系統 SHALL 提供標準化的 Git 工作流程指引，確保團隊協作一致性。
+
+#### Scenario: 分支命名規範
+
+- **GIVEN** 開發者需要建立新分支進行開發
+- **WHEN** 建立環境主分支
+- **THEN** 分支名 SHALL 遵循 `${ENV}_[frontend/backend]_[system]_[collaborator]` 格式（環境名稱可配置）
+- **AND** 環境變數 SHALL 提供預設值：`${ENV_DEV}=dev`, `${ENV_STAGING}=staging`, `${ENV_PROD}=prod`
+- **AND** 功能分支 SHALL 遵循 `feature/`、`fix-issue/`、`hotfix/` 前綴規範
+
+#### Scenario: 開發工作流程
+
+- **GIVEN** 開發者完成功能開發
+- **WHEN** 準備推送變更
+- **THEN** 工作流程 SHALL 遵循 `${ENV_DEV}` → `${ENV_STAGING}` → `${ENV_PROD}` 順序
+- **AND** 每次環境推進 SHALL 經過相應的審核流程
+
+#### Scenario: 問題回報與修復流程
+
+- **GIVEN** 測試階段發現問題
+- **WHEN** 需要建立修復分支
+- **THEN** 緊急修復 SHALL 使用 `hotfix/` 前綴
+- **AND** 一般問題修復 SHALL 使用 `fix-issue/` 前綴
+
+#### Scenario: AI Agent 協作時的 Git 操作
+
+- **GIVEN** AI Agent 協助開發任務
+- **WHEN** Agent 首次需要執行 Git 分支操作
+- **THEN** Agent SHALL 詢問用戶環境命名偏好（開發、正式機測試、正式）
+- **AND** Agent SHALL 提供預設值（dev、staging、prod）供用戶選擇或自定義
+- **AND** Agent SHALL 參考 `02-development/shared/git-workflow.md`
+- **AND** Agent SHALL 使用對應的 Prompt 範本建立正確分支
+
+---
+
 ### Requirement: Template Files
 
 系統 SHALL 提供可複製的模板文件，加速新文件建立。
