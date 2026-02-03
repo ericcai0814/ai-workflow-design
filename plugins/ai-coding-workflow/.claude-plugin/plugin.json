@@ -1,7 +1,7 @@
 {
   "name": "ai-coding-workflow",
-  "description": "團隊標準化 AI 輔助開發工作流程。涵蓋規劃、前端、後端、驗證、審查等完整開發週期。",
   "version": "1.0.0",
+  "description": "團隊標準化 AI 輔助開發工作流程。涵蓋規劃、前端、後端、驗證、審查等完整開發週期。",
   "author": {
     "name": "Eric Cai",
     "email": "d4070707@gmail.com"
@@ -19,5 +19,7 @@
     "api-design",
     "hooks",
     "security"
-  ]
+  ],
+  "skills": ["./skills/", "./commands/"],
+  "agents": ["./agents/detect-context.md"]
 }

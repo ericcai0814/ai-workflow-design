@@ -9,42 +9,236 @@ description: 團隊標準化開發工作流程。使用時機：開始新專案�
 
 這個 skill 提供團隊標準化的 AI 輔助開發工作流程，涵蓋從規劃到部署的完整開發週期。
 
-**版本**：1.0.0
+**版本**：1.1.0
 
 **主要用戶**：AI Agent（Claude Code、Cursor）+ 前後端工程師
 
 **核心價值**：標準化 AI 協作流程、提供可重用的 Prompt 範本、記錄踩坑案例和成功模式
 
-## 快捷調用
+## 結構化執行流程
 
-### 方式一：使用內建別名
+本 workflow 採用 Phase 結構，確保每個階段都有明確的輸出和確認機制。
 
 ```
-/ai-coding-workflow:start
+Phase 1: 任務理解
+        ↓ [輸出：需求重述、假設清單、提問]
+Phase 2: 任務規劃
+        ↓ [輸出：執行計畫] → **WAIT FOR CONFIRMATION**
+Phase 3: 任務執行
+        ↓ [按步驟執行、更新進度]
+Phase 4: 驗收與交付
+        ↓ [輸出：70% MVP、產出清單]
 ```
 
-### 方式二：建立本地別名（推薦）
+---
 
-建立 `~/.claude/skills/ai-coding-workflow/SKILL.md`：
+## Phase 1: 任務理解
+
+**目標**：確保正確理解用戶需求，避免誤解
+
+### 執行步驟
+
+1. **重述需求**：用自己的話重述用戶的任務
+2. **列出假設**：列出執行此任務的假設
+3. **提出問題**：如有不確定的地方，提出問題
+
+### 輸出格式
 
 ```markdown
+## 任務理解
+
+### 需求重述
+
+[用自己的話重述用戶的需求]
+
+### 假設
+
+- [ ] 假設 1
+- [ ] 假設 2
+- [ ] 假設 3
+
+### 確認問題（如有）
+
+1. [問題 1]
+2. [問題 2]
+```
+
+### 任務類型判斷
+
+根據用戶輸入的關鍵字判斷任務類型：
+
+| 任務類型 | 觸發關鍵字                                        |
+| -------- | ------------------------------------------------- |
+| 規劃     | 分析需求、建立計畫、專案規劃、技術選型、任務拆解  |
+| 前端     | 設計系統、建立元件、前端、UI、樣式、Token、元件庫 |
+| 後端     | API 設計、資料庫、後端、認證、REST、GraphQL       |
+| 驗證     | 驗證、測試、整合、防止 bug、三層驗證              |
+| 審查     | 程式碼審查、review、檢查品質、PR review           |
+| 問題     | 問題、錯誤、bug、不 work、失敗、修復              |
+
 ---
-name: ai-coding-workflow
-description: AI Coding Workflow 快捷入口
+
+## Phase 2: 任務規劃
+
+**目標**：建立執行計畫，獲得用戶確認
+
+### 執行步驟
+
+1. **判斷複雜度**：根據影響範圍判斷 High/Medium/Low
+2. **讀取參考文件**：根據任務類型讀取對應的 references
+3. **制定執行計畫**：列出具體步驟
+4. **評估風險**：識別潛在問題
+
+### 複雜度判斷標準
+
+| 複雜度 | 判斷標準                           |
+| ------ | ---------------------------------- |
+| High   | 跨多個模組、需要設計決策、影響架構 |
+| Medium | 單一模組內、有既定模式可循         |
+| Low    | 單一檔案、小幅修改、有明確範例     |
+
+### 參考文件對應
+
+| 任務類型 | 讀取文件                                                   |
+| -------- | ---------------------------------------------------------- |
+| 規劃     | `references/01-planning/overview.md`                       |
+| 前端     | `references/02-development/frontend/design-system.md`      |
+| 後端     | `references/02-development/backend/api-design.md`          |
+| 驗證     | `references/02-development/shared/validation-framework.md` |
+| 審查     | `references/03-review/code-review-checklist.md`            |
+| 問題     | `references/appendix/pitfalls/index.md`                    |
+
+### 輸出格式
+
+```markdown
+## 任務規劃
+
+**任務類型**: [類型]
+**複雜度**: [High / Medium / Low]
+
+### 執行計畫
+
+| 步驟 | 動作       | 參考文件       |
+| ---- | ---------- | -------------- |
+| 1    | [具體動作] | [相關參考文件] |
+| 2    | [具體動作] | [相關參考文件] |
+| 3    | [具體動作] | [相關參考文件] |
+
+### 風險評估
+
+- [風險 1]：[緩解措施]
+- [風險 2]：[緩解措施]
+
 ---
 
-# AI Coding Workflow 別名
+**WAITING FOR CONFIRMATION**
 
-**立即使用 Skill tool 調用完整的 skill：**
+請確認執行計畫：
 
-Skill: ai-coding-workflow:ai-coding-workflow
+- `yes` - 開始執行
+- `modify` - 修改計畫
+- `cancel` - 取消
 ```
 
-設定後即可使用：
+### 關鍵：WAIT FOR CONFIRMATION
 
+**Phase 2 結束後，必須等待用戶確認才能進入 Phase 3。**
+
+- 不要自動繼續執行
+- 使用 AskUserQuestion 或等待用戶回覆
+- 如果用戶選擇 `modify`，根據反饋調整計畫
+
+---
+
+## Phase 3: 任務執行
+
+**目標**：按計畫執行，更新進度
+
+### 執行步驟
+
+1. **按步驟執行**：遵循 Phase 2 制定的計畫
+2. **更新進度**：每完成一個步驟，更新狀態
+3. **遇到問題時**：說明問題，詢問用戶意見
+
+### 進度更新格式
+
+```markdown
+## 執行進度
+
+| 步驟 | 狀態      | 備註       |
+| ---- | --------- | ---------- |
+| 1    | ✅ 完成   | [完成內容] |
+| 2    | 🔄 進行中 | [當前進度] |
+| 3    | ⏸️ 待執行 |            |
 ```
-/ai-coding-workflow
+
+### 執行原則
+
+1. **務必替換變數**：${FRAMEWORK}、${LANGUAGE} 等替換為實際值
+2. **遵循參考文件**：按 references 中的指引執行
+3. **使用腳本輔助**：可使用 `scripts/` 目錄中的腳本
+4. **及時回報**：遇到問題立即回報，不要自行決定跳過
+
+---
+
+## Phase 4: 驗收與交付
+
+**目標**：確認 70% MVP 完成，交付產出清單
+
+### 70% MVP 標準
+
+**驗收標準**：樣式正常、功能正常
+
+| 項目     | MVP 包含                       | 人工迭代           |
+| -------- | ------------------------------ | ------------------ |
+| 檔案結構 | ✅ 正確位置、正確命名          | -                  |
+| 基本功能 | ✅ 核心功能可運行              | 功能調整、功能疊加 |
+| 樣式     | ✅ 套用 Design Token、樣式正常 | 細節微調           |
+| 型別定義 | ✅ 主要 props/types            | 完整型別           |
+| 邊界處理 | ⏸️ 基本處理                    | 完整邊界處理       |
+
+### MVP 檢查清單
+
+執行完成後，逐項檢查：
+
+- [ ] 檔案放在正確位置
+- [ ] 命名符合專案規範
+- [ ] 核心功能可運行
+- [ ] 樣式正常顯示
+- [ ] 無明顯錯誤
+
+### 輸出格式
+
+```markdown
+## 任務完成
+
+### 產出清單
+
+| 類型 | 檔案路徑             | 說明   |
+| ---- | -------------------- | ------ |
+| 元件 | `src/components/...` | [說明] |
+| 樣式 | `src/styles/...`     | [說明] |
+| 型別 | `src/types/...`      | [說明] |
+
+### MVP 檢查
+
+- [x] 檔案放在正確位置
+- [x] 命名符合專案規範
+- [x] 核心功能可運行
+- [x] 樣式正常顯示
+- [x] 無明顯錯誤
+
+### 後續建議
+
+1. [建議 1]
+2. [建議 2]
+
+---
+
+**MVP 已完成，請檢查後告訴我需要調整的地方。**
 ```
+
+---
 
 ## 使用時機
 
@@ -144,31 +338,7 @@ Skill: ai-coding-workflow:ai-coding-workflow
 - `references/appendix/pitfalls/index.md`
 - `references/appendix/prompt-cheatsheet.md`
 
-## 執行流程
-
-```
-1. 根據任務關鍵字判斷類型
-        ↓
-2. 讀取對應的 references 文件
-        ↓
-3. 執行任務（可使用 scripts/ 腳本）
-        ↓
-4. 產出 70% MVP
-        ↓
-5. 提示：「MVP 已完成，請檢查後告訴我需要調整的地方」
-```
-
-## 70% MVP 標準
-
-**驗收標準**：樣式正常、功能正常
-
-| 項目     | MVP 包含                       | 人工迭代           |
-| -------- | ------------------------------ | ------------------ |
-| 檔案結構 | ✅ 正確位置、正確命名          | -                  |
-| 基本功能 | ✅ 核心功能可運行              | 功能調整、功能疊加 |
-| 樣式     | ✅ 套用 Design Token、樣式正常 | 細節微調           |
-| 型別定義 | ✅ 主要 props/types            | 完整型別           |
-| 邊界處理 | ⏸️ 基本處理                    | 完整邊界處理       |
+---
 
 ## 技術棧適配
 
@@ -185,12 +355,23 @@ ${DATABASE}         - 資料庫（PostgreSQL、MySQL、MongoDB）
 ${API_STYLE}        - API 風格（RESTful、GraphQL）
 ```
 
-### 自動偵測策略
+### 上下文偵測
 
-1. 檢查 `package.json` 確認前端框架
-2. 檢查 `requirements.txt` / `.csproj` / `go.mod` 確認後端語言
-3. 檢查 `docker-compose.yml` 確認資料庫
-4. 不確定時詢問用戶
+使用 `detect-context` skill 或 agent 偵測專案技術棧：
+
+```
+Skill: ai-coding-workflow:detect-context
+```
+
+或：
+
+```
+Task tool:
+  subagent_type: detect-context
+  prompt: "偵測當前專案的技術棧和狀態"
+```
+
+---
 
 ## 核心流程
 
@@ -232,6 +413,8 @@ ${API_STYLE}        - API 風格（RESTful、GraphQL）
 4. 記錄：若問題重要，新增到 appendix/pitfalls/
 ```
 
+---
+
 ## 輔助腳本
 
 位於 `scripts/` 目錄，用於自動化重複動作：
@@ -241,6 +424,8 @@ ${API_STYLE}        - API 風格（RESTful、GraphQL）
 | `create-component.sh` | 建立元件檔案結構     | `./scripts/create-component.sh Button` |
 | `create-dbml.sh`      | 建立 DBML 資料庫定義 | `./scripts/create-dbml.sh users`       |
 | `run-tests.sh`        | 執行測試             | `./scripts/run-tests.sh`               |
+
+---
 
 ## 文件索引
 
@@ -292,6 +477,8 @@ ${API_STYLE}        - API 風格（RESTful、GraphQL）
 - `tech-stack-examples/` - 技術棧範例
 - `prompt-cheatsheet.md` - Prompt 速查表
 
+---
+
 ## 快速參考
 
 ### 常見場景 → 文件對應
@@ -304,6 +491,8 @@ ${API_STYLE}        - API 風格（RESTful、GraphQL）
 | 設計 API     | 02-development/backend/api-design.md             | prompts/design-api.md           |
 | 修復 Bug     | appendix/pitfalls/index.md                       | shared/prompts/bug-fixing.md    |
 | 程式碼審查   | 03-review/code-review-checklist.md               | prompts/review-code.md          |
+
+---
 
 ## 重要提醒
 
@@ -318,6 +507,7 @@ ${API_STYLE}        - API 風格（RESTful、GraphQL）
 - **偵測專案技術棧**後再使用 Prompt
 - **執行 Prompt 後用清單驗證**
 - **`requires_human_review: true` 時請求人工審核**
+- **Phase 2 結束後等待用戶確認**
 
 ### Prompt 使用規則
 
