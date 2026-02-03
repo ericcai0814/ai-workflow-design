@@ -1,6 +1,6 @@
 {
   "name": "ai-coding-workflow",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "團隊標準化 AI 輔助開發工作流程。涵蓋規劃、前端、後端、驗證、審查等完整開發週期。",
   "author": {
     "name": "Eric Cai",
