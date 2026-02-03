@@ -20,6 +20,6 @@
     "hooks",
     "security"
   ],
-  "skills": ["./skills/", "./commands/"],
+  "skills": ["./skills/"],
   "agents": ["./agents/detect-context.md"]
 }
