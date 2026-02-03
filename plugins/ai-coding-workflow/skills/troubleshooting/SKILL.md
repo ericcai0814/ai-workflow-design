@@ -18,11 +18,13 @@ description: 問題排查工作流程。使用時機：問題、錯誤、bug、�
 ### 執行步驟
 
 1. **調用 detect-context**：偵測專案技術棧以便對照相關踩坑案例
+
    ```
    Task tool:
      subagent_type: ai-coding-workflow:detect-context
      prompt: "偵測當前專案的技術棧以對照踩坑案例"
    ```
+
    如果偵測失敗，使用 AskUserQuestion 詢問用戶
 
 2. **重述問題**：用自己的話重述用戶遇到的問題
@@ -42,19 +44,23 @@ description: 問題排查工作流程。使用時機：問題、錯誤、bug、�
 ## 問題理解
 
 ### 專案上下文
+
 - **技術棧**: [偵測到的技術棧]
 - **相關踩坑案例**: [可能相關的案例]
 
 ### 問題重述
+
 [用自己的話重述問題]
 
 ### 收集的資訊
+
 - **錯誤訊息**: [錯誤訊息]
 - **重現步驟**: [步驟]
 - **預期行為**: [預期]
 - **實際行為**: [實際]
 
 ### 確認問題（如有）
+
 1. [問題 1]
 2. [問題 2]
 ```
@@ -76,8 +82,8 @@ description: 問題排查工作流程。使用時機：問題、錯誤、bug、�
    | Low    | 單一檔案、小幅修改、有明確範例     |
 
 2. **讀取參考文件**：
-   - `references/appendix/pitfalls/index.md` - 踩坑案例索引
-   - `references/appendix/prompt-cheatsheet.md` - Prompt 速查表
+   - `references/index.md` - 踩坑案例索引
+   - `references/prompt-cheatsheet.md` - Prompt 速查表
 
 3. **檢查已知踩坑**：是否有類似的已記錄案例
 
@@ -94,6 +100,7 @@ description: 問題排查工作流程。使用時機：問題、錯誤、bug、�
 **複雜度**: [High / Medium / Low]
 
 ### 相關踩坑案例
+
 - [案例名稱]：[相關性說明]
 
 ### 除錯計畫
@@ -114,6 +121,7 @@ description: 問題排查工作流程。使用時機：問題、錯誤、bug、�
 **WAITING FOR CONFIRMATION**
 
 請確認除錯計畫：
+
 - `yes` - 開始除錯
 - `modify` - 修改計畫
 - `cancel` - 取消
@@ -137,15 +145,15 @@ description: 問題排查工作流程。使用時機：問題、錯誤、bug、�
 
 根據問題類型讀取相關踩坑案例：
 
-| 技術棧     | 參考文件                                           |
-| ---------- | -------------------------------------------------- |
-| CI/CD      | `references/appendix/pitfalls/case-01-cicd-configuration.md` |
-| Astro      | `references/appendix/pitfalls/case-02-astro5-env-variables.md` |
-| Vercel     | `references/appendix/pitfalls/case-03-vercel-api-404.md` |
+| 技術棧 | 參考文件                                     |
+| ------ | -------------------------------------------- |
+| CI/CD  | `references/case-01-cicd-configuration.md`   |
+| Astro  | `references/case-02-astro5-env-variables.md` |
+| Vercel | `references/case-03-vercel-api-404.md`       |
 
 ### Prompts 目錄
 
-- `references/02-development/shared/prompts/bug-fixing.md` - Bug 修復
+- `references/prompts/bug-fixing.md` - Bug 修復
 
 ### 除錯流程
 
@@ -188,12 +196,12 @@ description: 問題排查工作流程。使用時機：問題、錯誤、bug、�
 
 ### 70% MVP 標準（問題排查類）
 
-| 項目       | MVP 包含                       | 人工迭代           |
-| ---------- | ------------------------------ | ------------------ |
-| 問題定位   | ✅ 根本原因已找到              | 深入分析           |
-| 修復       | ✅ 問題已修復                  | 防禦性修復         |
-| 驗證       | ✅ 修復已驗證                  | 回歸測試           |
-| 文檔       | ⏸️ 基本記錄                    | 踩坑案例           |
+| 項目     | MVP 包含          | 人工迭代   |
+| -------- | ----------------- | ---------- |
+| 問題定位 | ✅ 根本原因已找到 | 深入分析   |
+| 修復     | ✅ 問題已修復     | 防禦性修復 |
+| 驗證     | ✅ 修復已驗證     | 回歸測試   |
+| 文檔     | ⏸️ 基本記錄       | 踩坑案例   |
 
 ### MVP 檢查清單
 
@@ -209,15 +217,16 @@ description: 問題排查工作流程。使用時機：問題、錯誤、bug、�
 ## 問題已修復
 
 ### 問題摘要
+
 - **問題**: [問題描述]
 - **根本原因**: [根本原因]
 - **修復方式**: [修復方式]
 
 ### 修改清單
 
-| 類型 | 檔案路徑   | 修改說明   |
-| ---- | ---------- | ---------- |
-| 修復 | `src/...`  | [說明]     |
+| 類型 | 檔案路徑  | 修改說明 |
+| ---- | --------- | -------- |
+| 修復 | `src/...` | [說明]   |
 
 ### MVP 檢查
 
@@ -230,6 +239,7 @@ description: 問題排查工作流程。使用時機：問題、錯誤、bug、�
 ### 經驗記錄
 
 **是否值得記錄為踩坑案例？**
+
 - [ ] 是 - 建議新增到 `appendix/pitfalls/`
 - [ ] 否 - 問題較為特定
 
@@ -249,11 +259,11 @@ description: 問題排查工作流程。使用時機：問題、錯誤、bug、�
 
 ### 常見場景 → 文件對應
 
-| 場景       | 讀取                              | 執行                       |
-| ---------- | --------------------------------- | -------------------------- |
-| Bug 修復   | appendix/pitfalls/index.md        | prompts/bug-fixing.md      |
-| 已知踩坑   | appendix/pitfalls/case-*.md       | 套用已記錄的解決方案       |
-| 未知問題   | appendix/prompt-cheatsheet.md     | prompts/bug-fixing.md      |
+| 場景     | 讀取                 | 執行                  |
+| -------- | -------------------- | --------------------- |
+| Bug 修復 | index.md             | prompts/bug-fixing.md |
+| 已知踩坑 | case-\*.md           | 套用已記錄的解決方案  |
+| 未知問題 | prompt-cheatsheet.md | prompts/bug-fixing.md |
 
 ---
 
