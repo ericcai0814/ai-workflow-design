@@ -21,6 +21,22 @@ last_updated: "2026-01-23"
 - 新專案需要設定路由時
 - 新增頁面需要規劃路由時
 
+---
+
+## 變數說明
+
+執行此 prompt 前，請先取得以下值：
+
+| 變數                      | 來源           | 說明         | 範例                                           |
+| ------------------------- | -------------- | ------------ | ---------------------------------------------- |
+| `${FEATURE_REQUIREMENTS}` | 用戶描述       | 功能需求說明 | `需要首頁、登入、Dashboard、用戶管理`          |
+| `${FRAMEWORK}`            | detect-context | 前端框架     | `React`, `Vue`, `Angular`                      |
+| `${ROUTER_LIBRARY}`       | detect-context | 路由庫       | `React Router`, `Vue Router`, `Angular Router` |
+
+**執行時，將所有 `${...}` 替換為實際值。如果 detect-context 無法偵測，請詢問用戶。**
+
+---
+
 ## Prompt 範本
 
 ```prompt

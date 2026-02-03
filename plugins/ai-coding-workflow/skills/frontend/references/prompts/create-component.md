@@ -21,6 +21,24 @@ last_updated: "2026-01-23"
 - 需要建立新元件時
 - Token 系統已建立後
 
+---
+
+## 變數說明
+
+執行此 prompt 前，請先取得以下值：
+
+| 變數                   | 來源           | 說明                           | 範例                                           |
+| ---------------------- | -------------- | ------------------------------ | ---------------------------------------------- |
+| `${COMPONENT_NAME}`    | 用戶指定       | 要建立的元件名稱               | `Button`, `Card`, `Modal`                      |
+| `${COMPONENT_PURPOSE}` | 用戶描述       | 元件的用途說明                 | `通用按鈕，支援多種樣式變體`                   |
+| `${FRAMEWORK}`         | detect-context | 前端框架                       | `React`, `Vue`, `Angular`                      |
+| `${CSS_SOLUTION}`      | detect-context | CSS 方案                       | `Tailwind`, `CSS Modules`, `styled-components` |
+| `${DESIGN_TOKENS}`     | 設計系統       | Token 定義（顏色、間距、字體） | `見 tokens/index.ts`                           |
+
+**執行時，將所有 `${...}` 替換為實際值。如果 detect-context 無法偵測，請詢問用戶。**
+
+---
+
 ## Prompt 範本
 
 ```prompt

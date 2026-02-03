@@ -22,6 +22,23 @@ last_updated: "2026-01-23"
 - 需要統一設計規範時
 - 重構現有樣式時
 
+---
+
+## 變數說明
+
+執行此 prompt 前，請先取得以下值：
+
+| 變數                  | 來源           | 說明                                         | 範例                                           |
+| --------------------- | -------------- | -------------------------------------------- | ---------------------------------------------- |
+| `${DESIGN_REFERENCE}` | 用戶提供       | 設計參考（Figma 連結、設計圖片、或文字描述） | `Figma: https://figma.com/...`                 |
+| `${FRAMEWORK}`        | detect-context | 前端框架                                     | `React`, `Vue`, `Angular`                      |
+| `${CSS_SOLUTION}`     | detect-context | CSS 方案                                     | `Tailwind`, `CSS Modules`, `styled-components` |
+| `${UI_LIBRARY}`       | detect-context | UI 庫                                        | `Ant Design`, `MUI`, `Vuetify`, `無`           |
+
+**執行時，將所有 `${...}` 替換為實際值。如果 detect-context 無法偵測，請詢問用戶。**
+
+---
+
 ## Prompt 範本
 
 ```prompt
