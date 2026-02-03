@@ -3,7 +3,7 @@ name: detect-context
 description: 上下文偵測 Agent。偵測專案技術棧、狀態，並在偵測失敗時詢問用戶。
 tools:
   - Read
-  - Grep
+  - mgrep
   - Glob
   - Bash
 ---
