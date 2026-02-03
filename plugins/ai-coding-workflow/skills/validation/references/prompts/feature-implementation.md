@@ -21,6 +21,23 @@ last_updated: "2026-01-23"
 - 有完整的功能規格時
 - 需要全端實作時
 
+---
+
+## 變數說明
+
+執行此 prompt 前，請先取得以下值：
+
+| 變數                | 來源           | 說明             | 範例                                |
+| ------------------- | -------------- | ---------------- | ----------------------------------- |
+| `${FEATURE_SPEC}`   | 用戶提供       | 功能需求規格描述 | `用戶登入功能，支援 email/密碼認證` |
+| `${FRONTEND_STACK}` | detect-context | 前端技術棧       | `React 18 + TypeScript + Tailwind`  |
+| `${BACKEND_STACK}`  | detect-context | 後端技術棧       | `Node.js + Express + Prisma`        |
+| `${DATABASE}`       | detect-context | 資料庫類型       | `PostgreSQL`                        |
+
+**執行時，將所有 `${...}` 替換為實際值。如果 detect-context 無法偵測，請詢問用戶。**
+
+---
+
 ## Prompt 範本
 
 ```prompt

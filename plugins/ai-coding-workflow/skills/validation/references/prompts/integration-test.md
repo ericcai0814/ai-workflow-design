@@ -21,6 +21,22 @@ last_updated: "2026-01-23"
 - 功能開發完成後
 - 需要驗證端對端流程時
 
+---
+
+## 變數說明
+
+執行此 prompt 前，請先取得以下值：
+
+| 變數                     | 來源           | 說明         | 範例                                          |
+| ------------------------ | -------------- | ------------ | --------------------------------------------- |
+| `${FEATURE_DESCRIPTION}` | 用戶提供       | 功能描述     | `用戶登入功能，包含登入、登出、密碼重設`      |
+| `${API_ENDPOINTS}`       | detect-context | API 端點清單 | `POST /api/auth/login, POST /api/auth/logout` |
+| `${TEST_FRAMEWORK}`      | detect-context | 測試框架     | `Vitest`                                      |
+
+**執行時，將所有 `${...}` 替換為實際值。如果 detect-context 無法偵測，請詢問用戶。**
+
+---
+
 ## Prompt 範本
 
 ```prompt
