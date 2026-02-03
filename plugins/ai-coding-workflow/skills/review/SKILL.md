@@ -18,11 +18,13 @@ description: 程式碼審查工作流程。使用時機：程式碼審查、revi
 ### 執行步驟
 
 1. **調用 detect-context**：偵測專案程式碼規範、lint 設定
+
    ```
    Task tool:
      subagent_type: ai-coding-workflow:detect-context
      prompt: "偵測當前專案的程式碼規範和 lint 設定"
    ```
+
    如果偵測失敗，使用 AskUserQuestion 詢問用戶
 
 2. **重述需求**：用自己的話重述用戶的任務
@@ -39,19 +41,23 @@ description: 程式碼審查工作流程。使用時機：程式碼審查、revi
 ## 任務理解
 
 ### 專案上下文
+
 - **Linter**: [ESLint / Prettier / ...]
 - **程式碼規範**: [Airbnb / Standard / ...]
 - **審查範圍**: [PR / 特定檔案 / 全專案]
 
 ### 需求重述
+
 [用自己的話重述用戶的需求]
 
 ### 假設
+
 - [ ] 假設 1
 - [ ] 假設 2
 - [ ] 假設 3
 
 ### 確認問題（如有）
+
 1. [問題 1]
 2. [問題 2]
 ```
@@ -73,8 +79,8 @@ description: 程式碼審查工作流程。使用時機：程式碼審查、revi
    | Low    | 單一檔案、小幅修改、有明確範例     |
 
 2. **讀取參考文件**：
-   - `references/03-review/overview.md` - 審核階段總覽
-   - `references/03-review/code-review-checklist.md` - 程式碼審查清單
+   - `references/overview.md` - 審核階段總覽
+   - `references/code-review-checklist.md` - 程式碼審查清單
 
 3. **制定執行計畫**：列出具體步驟
 
@@ -106,6 +112,7 @@ description: 程式碼審查工作流程。使用時機：程式碼審查、revi
 **WAITING FOR CONFIRMATION**
 
 請確認執行計畫：
+
 - `yes` - 開始執行
 - `modify` - 修改計畫
 - `cancel` - 取消
@@ -129,25 +136,25 @@ description: 程式碼審查工作流程。使用時機：程式碼審查、revi
 
 根據審查任務類型讀取：
 
-| 審查任務   | 參考文件                                           |
-| ---------- | -------------------------------------------------- |
-| 程式碼審查 | `references/03-review/code-review-checklist.md`    |
-| 安全審查   | `references/03-review/code-review-checklist.md`（安全部分） |
-| 效能審查   | `references/03-review/code-review-checklist.md`（效能部分） |
+| 審查任務   | 參考文件                                          |
+| ---------- | ------------------------------------------------- |
+| 程式碼審查 | `references/code-review-checklist.md`             |
+| 安全審查   | `references/code-review-checklist.md`（安全部分） |
+| 效能審查   | `references/code-review-checklist.md`（效能部分） |
 
 ### Prompts 目錄
 
-- `references/03-review/prompts/review-code.md` - 程式碼審查
+- `references/prompts/review-code.md` - 程式碼審查
 
 ### 審查清單重點
 
-| 類別 | 檢查項目                   |
-| ---- | -------------------------- |
-| 功能 | 邏輯正確、邊界處理         |
-| 安全 | 輸入驗證、SQL 注入、XSS    |
-| 效能 | N+1 查詢、記憶體洩漏       |
-| 可讀 | 命名清晰、結構合理         |
-| 測試 | 覆蓋率足夠、邊界案例       |
+| 類別 | 檢查項目                |
+| ---- | ----------------------- |
+| 功能 | 邏輯正確、邊界處理      |
+| 安全 | 輸入驗證、SQL 注入、XSS |
+| 效能 | N+1 查詢、記憶體洩漏    |
+| 可讀 | 命名清晰、結構合理      |
+| 測試 | 覆蓋率足夠、邊界案例    |
 
 ### 執行步驟
 
@@ -182,12 +189,12 @@ description: 程式碼審查工作流程。使用時機：程式碼審查、revi
 
 ### 70% MVP 標準（審查類）
 
-| 項目       | MVP 包含                       | 人工迭代           |
-| ---------- | ------------------------------ | ------------------ |
-| 功能審查   | ✅ 核心邏輯檢查                | 邊界案例           |
-| 安全審查   | ✅ OWASP Top 10                | 深度滲透           |
-| 效能審查   | ✅ 明顯問題                    | 效能測試           |
-| 可讀性     | ✅ 命名、結構                  | 架構優化           |
+| 項目     | MVP 包含        | 人工迭代 |
+| -------- | --------------- | -------- |
+| 功能審查 | ✅ 核心邏輯檢查 | 邊界案例 |
+| 安全審查 | ✅ OWASP Top 10 | 深度滲透 |
+| 效能審查 | ✅ 明顯問題     | 效能測試 |
+| 可讀性   | ✅ 命名、結構   | 架構優化 |
 
 ### MVP 檢查清單
 
@@ -214,15 +221,19 @@ description: 程式碼審查工作流程。使用時機：程式碼審查、revi
 ### 問題清單
 
 #### Critical
+
 - [ ] [問題描述] - [修復建議]
 
 #### High
+
 - [ ] [問題描述] - [修復建議]
 
 #### Medium
+
 - [ ] [問題描述] - [修復建議]
 
 #### Low
+
 - [ ] [問題描述] - [修復建議]
 
 ### MVP 檢查
@@ -249,11 +260,11 @@ description: 程式碼審查工作流程。使用時機：程式碼審查、revi
 
 ### 常見場景 → 文件對應
 
-| 場景       | 讀取                              | 執行                    |
-| ---------- | --------------------------------- | ----------------------- |
-| PR 審查    | 03-review/code-review-checklist.md| prompts/review-code.md  |
-| 安全審查   | 03-review/code-review-checklist.md| prompts/review-code.md  |
-| 效能審查   | 03-review/code-review-checklist.md| prompts/review-code.md  |
+| 場景     | 讀取                     | 執行                   |
+| -------- | ------------------------ | ---------------------- |
+| PR 審查  | code-review-checklist.md | prompts/review-code.md |
+| 安全審查 | code-review-checklist.md | prompts/review-code.md |
+| 效能審查 | code-review-checklist.md | prompts/review-code.md |
 
 ---
 
