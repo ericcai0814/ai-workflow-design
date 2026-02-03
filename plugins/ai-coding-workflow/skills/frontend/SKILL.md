@@ -18,11 +18,13 @@ description: 前端開發工作流程。使用時機：設計系統、建立元�
 ### 執行步驟
 
 1. **調用 detect-context**：偵測專案前端框架、UI 庫、狀態管理方案
+
    ```
    Task tool:
      subagent_type: ai-coding-workflow:detect-context
      prompt: "偵測當前專案的前端技術棧（框架、UI 庫、狀態管理）"
    ```
+
    如果偵測失敗，使用 AskUserQuestion 詢問用戶
 
 2. **重述需求**：用自己的話重述用戶的任務
@@ -39,19 +41,23 @@ description: 前端開發工作流程。使用時機：設計系統、建立元�
 ## 任務理解
 
 ### 專案上下文
+
 - **前端框架**: [Vue 3 / React / Angular / ...]
 - **UI 庫**: [Vuetify / Ant Design / Material-UI / ...]
 - **狀態管理**: [Pinia / Redux / Zustand / ...]
 
 ### 需求重述
+
 [用自己的話重述用戶的需求]
 
 ### 假設
+
 - [ ] 假設 1
 - [ ] 假設 2
 - [ ] 假設 3
 
 ### 確認問題（如有）
+
 1. [問題 1]
 2. [問題 2]
 ```
@@ -73,8 +79,8 @@ description: 前端開發工作流程。使用時機：設計系統、建立元�
    | Low    | 單一檔案、小幅修改、有明確範例     |
 
 2. **讀取參考文件**：
-   - `references/02-development/frontend/overview.md` - 前端開發總覽
-   - `references/02-development/frontend/design-system.md` - 設計系統（優先）
+   - `references/overview.md` - 前端開發總覽
+   - `references/design-system.md` - 設計系統（優先）
 
 3. **制定執行計畫**：列出具體步驟
 
@@ -106,6 +112,7 @@ description: 前端開發工作流程。使用時機：設計系統、建立元�
 **WAITING FOR CONFIRMATION**
 
 請確認執行計畫：
+
 - `yes` - 開始執行
 - `modify` - 修改計畫
 - `cancel` - 取消
@@ -129,20 +136,20 @@ description: 前端開發工作流程。使用時機：設計系統、建立元�
 
 根據前端任務類型讀取：
 
-| 前端任務   | 參考文件                                           |
-| ---------- | -------------------------------------------------- |
-| 設計系統   | `references/02-development/frontend/design-system.md` |
-| 元件開發   | `references/02-development/frontend/component-development.md` |
-| 狀態管理   | `references/02-development/frontend/state-management.md` |
-| 路由設計   | `references/02-development/frontend/routing.md` |
+| 前端任務 | 參考文件                              |
+| -------- | ------------------------------------- |
+| 設計系統 | `references/design-system.md`         |
+| 元件開發 | `references/component-development.md` |
+| 狀態管理 | `references/state-management.md`      |
+| 路由設計 | `references/routing.md`               |
 
 ### Prompts 目錄
 
-- `references/02-development/frontend/prompts/setup-design-system.md` - 設計系統設置
-- `references/02-development/frontend/prompts/setup-token-system.md` - Token 系統設置
-- `references/02-development/frontend/prompts/create-component.md` - 元件建立
-- `references/02-development/frontend/prompts/setup-state-management.md` - 狀態管理設置
-- `references/02-development/frontend/prompts/setup-routing.md` - 路由設置
+- `references/prompts/setup-design-system.md` - 設計系統設置
+- `references/prompts/setup-token-system.md` - Token 系統設置
+- `references/prompts/create-component.md` - 元件建立
+- `references/prompts/setup-state-management.md` - 狀態管理設置
+- `references/prompts/setup-routing.md` - 路由設置
 
 ### 執行步驟
 
@@ -230,12 +237,12 @@ description: 前端開發工作流程。使用時機：設計系統、建立元�
 
 ### 常見場景 → 文件對應
 
-| 場景         | 讀取                                     | 執行                            |
-| ------------ | ---------------------------------------- | ------------------------------- |
-| 建立設計系統 | frontend/design-system.md                | prompts/setup-design-system.md  |
-| 建立元件     | frontend/component-development.md        | prompts/create-component.md     |
-| 設定狀態管理 | frontend/state-management.md             | prompts/setup-state-management.md |
-| 設定路由     | frontend/routing.md                      | prompts/setup-routing.md        |
+| 場景         | 讀取                     | 執行                              |
+| ------------ | ------------------------ | --------------------------------- |
+| 建立設計系統 | design-system.md         | prompts/setup-design-system.md    |
+| 建立元件     | component-development.md | prompts/create-component.md       |
+| 設定狀態管理 | state-management.md      | prompts/setup-state-management.md |
+| 設定路由     | routing.md               | prompts/setup-routing.md          |
 
 ---
 
