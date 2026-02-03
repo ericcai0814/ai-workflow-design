@@ -18,11 +18,13 @@ description: 後端開發工作流程。使用時機：API 設計、資料庫、
 ### 執行步驟
 
 1. **調用 detect-context**：偵測專案後端框架、資料庫、ORM
+
    ```
    Task tool:
      subagent_type: ai-coding-workflow:detect-context
      prompt: "偵測當前專案的後端技術棧（框架、資料庫、ORM）"
    ```
+
    如果偵測失敗，使用 AskUserQuestion 詢問用戶
 
 2. **重述需求**：用自己的話重述用戶的任務
@@ -39,20 +41,24 @@ description: 後端開發工作流程。使用時機：API 設計、資料庫、
 ## 任務理解
 
 ### 專案上下文
+
 - **後端語言**: [Python / C# / Node.js / Go / ...]
 - **框架**: [FastAPI / Django / Express / ...]
 - **資料庫**: [PostgreSQL / MySQL / MongoDB / ...]
 - **ORM**: [SQLAlchemy / Prisma / TypeORM / ...]
 
 ### 需求重述
+
 [用自己的話重述用戶的需求]
 
 ### 假設
+
 - [ ] 假設 1
 - [ ] 假設 2
 - [ ] 假設 3
 
 ### 確認問題（如有）
+
 1. [問題 1]
 2. [問題 2]
 ```
@@ -74,8 +80,8 @@ description: 後端開發工作流程。使用時機：API 設計、資料庫、
    | Low    | 單一檔案、小幅修改、有明確範例     |
 
 2. **讀取參考文件**：
-   - `references/02-development/backend/overview.md` - 後端開發總覽
-   - `references/02-development/backend/api-design.md` - API 設計（優先）
+   - `references/overview.md` - 後端開發總覽
+   - `references/api-design.md` - API 設計（優先）
 
 3. **制定執行計畫**：列出具體步驟
 
@@ -107,6 +113,7 @@ description: 後端開發工作流程。使用時機：API 設計、資料庫、
 **WAITING FOR CONFIRMATION**
 
 請確認執行計畫：
+
 - `yes` - 開始執行
 - `modify` - 修改計畫
 - `cancel` - 取消
@@ -130,18 +137,18 @@ description: 後端開發工作流程。使用時機：API 設計、資料庫、
 
 根據後端任務類型讀取：
 
-| 後端任務   | 參考文件                                           |
-| ---------- | -------------------------------------------------- |
-| API 設計   | `references/02-development/backend/api-design.md`  |
-| 資料庫     | `references/02-development/backend/database.md`    |
-| 認證授權   | `references/02-development/backend/authentication.md` |
-| 商業邏輯   | `references/02-development/backend/business-logic.md` |
+| 後端任務 | 參考文件                       |
+| -------- | ------------------------------ |
+| API 設計 | `references/api-design.md`     |
+| 資料庫   | `references/database.md`       |
+| 認證授權 | `references/authentication.md` |
+| 商業邏輯 | `references/business-logic.md` |
 
 ### Prompts 目錄
 
-- `references/02-development/backend/prompts/design-api.md` - API 設計
-- `references/02-development/backend/prompts/create-model.md` - 模型建立
-- `references/02-development/backend/prompts/setup-auth.md` - 認證設置
+- `references/prompts/design-api.md` - API 設計
+- `references/prompts/create-model.md` - 模型建立
+- `references/prompts/setup-auth.md` - 認證設置
 
 ### 執行步驟
 
@@ -176,13 +183,13 @@ description: 後端開發工作流程。使用時機：API 設計、資料庫、
 
 ### 70% MVP 標準（後端類）
 
-| 項目     | MVP 包含                       | 人工迭代           |
-| -------- | ------------------------------ | ------------------ |
-| API 端點 | ✅ 核心 CRUD 可運行            | 進階查詢、分頁     |
-| 資料庫   | ✅ 基本 Schema 已定義          | 索引優化、關聯     |
-| 認證     | ✅ 基本認證可運行              | 權限細粒度控制     |
-| 錯誤處理 | ⏸️ 基本處理                    | 完整錯誤處理       |
-| 驗證     | ✅ 輸入驗證                    | 完整業務驗證       |
+| 項目     | MVP 包含              | 人工迭代       |
+| -------- | --------------------- | -------------- |
+| API 端點 | ✅ 核心 CRUD 可運行   | 進階查詢、分頁 |
+| 資料庫   | ✅ 基本 Schema 已定義 | 索引優化、關聯 |
+| 認證     | ✅ 基本認證可運行     | 權限細粒度控制 |
+| 錯誤處理 | ⏸️ 基本處理           | 完整錯誤處理   |
+| 驗證     | ✅ 輸入驗證           | 完整業務驗證   |
 
 ### MVP 檢查清單
 
@@ -199,11 +206,11 @@ description: 後端開發工作流程。使用時機：API 設計、資料庫、
 
 ### 產出清單
 
-| 類型   | 檔案路徑              | 說明   |
-| ------ | --------------------- | ------ |
-| API    | `src/api/...`         | [說明] |
-| Model  | `src/models/...`      | [說明] |
-| Schema | `prisma/schema.prisma`| [說明] |
+| 類型   | 檔案路徑               | 說明   |
+| ------ | ---------------------- | ------ |
+| API    | `src/api/...`          | [說明] |
+| Model  | `src/models/...`       | [說明] |
+| Schema | `prisma/schema.prisma` | [說明] |
 
 ### MVP 檢查
 
@@ -229,12 +236,12 @@ description: 後端開發工作流程。使用時機：API 設計、資料庫、
 
 ### 常見場景 → 文件對應
 
-| 場景       | 讀取                         | 執行                       |
-| ---------- | ---------------------------- | -------------------------- |
-| 設計 API   | backend/api-design.md        | prompts/design-api.md      |
-| 建立資料庫 | backend/database.md          | prompts/create-model.md    |
-| 設定認證   | backend/authentication.md    | prompts/setup-auth.md      |
-| 商業邏輯   | backend/business-logic.md    | prompts/design-api.md      |
+| 場景       | 讀取              | 執行                    |
+| ---------- | ----------------- | ----------------------- |
+| 設計 API   | api-design.md     | prompts/design-api.md   |
+| 建立資料庫 | database.md       | prompts/create-model.md |
+| 設定認證   | authentication.md | prompts/setup-auth.md   |
+| 商業邏輯   | business-logic.md | prompts/design-api.md   |
 
 ---
 
