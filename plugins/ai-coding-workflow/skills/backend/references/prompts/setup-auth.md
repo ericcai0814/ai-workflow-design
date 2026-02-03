@@ -21,6 +21,22 @@ last_updated: "2026-01-23"
 - 需要保護 API 端點時
 - 實作登入/登出功能時
 
+---
+
+## 變數說明
+
+執行此 prompt 前，請先取得以下值：
+
+| 變數                   | 來源           | 說明         | 範例                                         |
+| ---------------------- | -------------- | ------------ | -------------------------------------------- |
+| `${AUTH_REQUIREMENTS}` | 用戶提供       | 認證需求描述 | 支援 email/password 登入，需要 refresh token |
+| `${FRAMEWORK}`         | detect-context | 後端框架     | Express, Fastify, NestJS, Django             |
+| `${AUTH_METHOD}`       | 用戶指定       | 認證方式     | JWT / Session / OAuth                        |
+
+**執行時，將所有 `${...}` 替換為實際值。如果 detect-context 無法偵測，請詢問用戶。**
+
+---
+
 ## Prompt 範本
 
 ```prompt

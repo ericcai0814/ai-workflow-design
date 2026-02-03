@@ -21,6 +21,22 @@ last_updated: "2026-01-23"
 - API 設計完成後
 - 需要建立新的資料表時
 
+---
+
+## 變數說明
+
+執行此 prompt 前，請先取得以下值：
+
+| 變數          | 來源           | 說明         | 範例                                    |
+| ------------- | -------------- | ------------ | --------------------------------------- |
+| `${API_SPEC}` | 用戶提供       | API 規格描述 | GET /users, POST /users, GET /users/:id |
+| `${DATABASE}` | detect-context | 資料庫類型   | PostgreSQL / MySQL / MongoDB            |
+| `${ORM}`      | detect-context | ORM 工具     | Prisma / Drizzle / SQLAlchemy / TypeORM |
+
+**執行時，將所有 `${...}` 替換為實際值。如果 detect-context 無法偵測，請詢問用戶。**
+
+---
+
 ## Prompt 範本
 
 ```prompt
