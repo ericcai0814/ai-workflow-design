@@ -37,3 +37,14 @@
 - [x] 6.5 測試 `/review` skill 觸發和參考文件載入
 - [x] 6.6 測試 `/troubleshooting` skill 觸發和參考文件載入
 - [x] 6.7 確認 detect-context agent 被正確調用
+
+## 7. 分配 References 到各 Skill
+
+- [x] 7.1 建立 `skills/planning/references/` 並複製 `01-planning/` 下的檔案（5 個 md + 2 個 prompts）
+- [x] 7.2 建立 `skills/frontend/references/` 並複製 `02-development/frontend/` 下的檔案（8 個 md + 5 個 prompts）
+- [x] 7.3 建立 `skills/backend/references/` 並複製 `02-development/backend/` 下的檔案（5 個 md + 3 個 prompts）
+- [x] 7.4 建立 `skills/validation/references/` 並複製 `02-development/shared/` 下的檔案（4 個 md + 5 個 prompts）
+- [x] 7.5 建立 `skills/review/references/` 並複製 `03-review/` 下的檔案（2 個 md + 1 個 prompt）
+- [x] 7.6 建立 `skills/troubleshooting/references/` 並複製 pitfalls + bug-fixing prompt（5 個 md + 1 個 prompt）
+- [x] 7.7 更新各 SKILL.md 中的路徑引用（移除 `01-planning/`、`02-development/` 等前綴）
+- [x] 7.8 刪除舊的 `skills/ai-coding-workflow/references/` 共用目錄
