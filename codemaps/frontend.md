@@ -1,6 +1,6 @@
 # Frontend Codemap
 
-**Last Updated:** 2026-01-28
+**Last Updated:** 2026-02-05
 **Scope:** Skills, Commands（面向用戶的介面）
 
 ## Overview
@@ -9,68 +9,152 @@
 
 ```
 ├── plugins/ai-coding-workflow/skills/
-│   └── ai-coding-workflow/
-│       ├── SKILL.md              # Skill 入口
-│       ├── references/           # 開發參考文件（55 個）
-│       └── templates/            # 輸出模板（6 個）
+│   ├── planning/                  # 規劃 Skill
+│   │   ├── SKILL.md
+│   │   └── references/ (7 個文件)
+│   ├── frontend/                  # 前端開發 Skill
+│   │   ├── SKILL.md
+│   │   └── references/ (13 個文件)
+│   ├── backend/                   # 後端開發 Skill
+│   │   ├── SKILL.md
+│   │   └── references/ (8 個文件)
+│   ├── validation/                # 驗證測試 Skill
+│   │   ├── SKILL.md
+│   │   └── references/ (9 個文件)
+│   ├── review/                    # 程式碼審查 Skill
+│   │   ├── SKILL.md
+│   │   └── references/ (3 個文件)
+│   ├── troubleshooting/           # 問題排查 Skill
+│   │   ├── SKILL.md
+│   │   └── references/ (6 個文件)
+│   └── detect-context/            # 上下文偵測 Skill
+│       └── SKILL.md
+├── plugins/ai-coding-workflow/templates/
+│   ├── phase-structure.md         # 四階段流程結構模板
+│   └── prompt-variable-guide.md   # Prompt 變數說明模板
 └── .claude/
-    ├── skills/openspec-*/        # OpenSpec Skills（10 個）
-    └── commands/opsx/            # OpenSpec Commands（10 個）
+    ├── skills/openspec-*/         # OpenSpec Skills（10 個）
+    └── commands/opsx/             # OpenSpec Commands（10 個）
 ```
 
-## AI Coding Workflow Skill
+## AI Coding Workflow Skills (v2.1.0)
 
-### Entry Point
+### Skill 架構
 
-**File:** `plugins/ai-coding-workflow/skills/ai-coding-workflow/SKILL.md`
+v2.1.0 將原本的單一 skill 拆分為 **7 個獨立 skills**，每個 skill 服務單一任務類型，降低 context 消耗。
 
-**觸發方式：**
+每個 skill 遵循標準化四階段流程：
 
-- 執行 `/ai-coding-workflow` 命令
-- 關鍵字自動觸發
+1. **Phase 1** — 任務理解（調用 detect-context + 需求釐清）
+2. **Phase 2** — 任務規劃（複雜度評估 + 執行計畫，需用戶確認）
+3. **Phase 3** — 任務執行（強制讀取 prompt 指令 + 逐步實作）
+4. **Phase 4** — 交付驗證（70% MVP 輸出）
 
 ### Trigger Keywords
 
-| 關鍵字                       | 任務類型 | 讀取目錄                              |
-| ---------------------------- | -------- | ------------------------------------- |
-| 分析需求、建立計畫、技術選型 | 規劃     | `references/01-planning/`             |
-| 設計系統、建立元件、Token    | 前端開發 | `references/02-development/frontend/` |
-| API 設計、資料庫、認證       | 後端開發 | `references/02-development/backend/`  |
-| 驗證、測試、三層驗證         | 測試整合 | `references/02-development/shared/`   |
-| 程式碼審查、PR review        | 審核     | `references/03-review/`               |
-| 問題、錯誤、bug              | 排查     | `references/appendix/pitfalls/`       |
+| Skill           | 關鍵字                       | Reference 文件數 |
+| --------------- | ---------------------------- | ---------------- |
+| planning        | 分析需求、建立計畫、技術選型 | 7                |
+| frontend        | 設計系統、建立元件、Token    | 13               |
+| backend         | API 設計、資料庫、認證       | 8                |
+| validation      | 驗證、測試、三層驗證         | 9                |
+| review          | 程式碼審查、PR review        | 3                |
+| troubleshooting | 問題、錯誤、bug              | 6                |
+| detect-context  | （自動調用）                 | 0（知識庫內建）  |
 
-### Reference Structure
+### Reference Structure（per skill）
+
+每個 skill 的 references/ 目錄結構：
 
 ```
 references/
-├── 01-planning/           # 規劃階段
-│   ├── overview.md
-│   ├── task-decomposition.md
-│   ├── tech-stack-selection.md
-│   └── prompts/           # 可執行 Prompt
-├── 02-development/        # 開發階段
-│   ├── frontend/          # 前端（10 個文件）
-│   ├── backend/           # 後端（8 個文件）
-│   └── shared/            # 共用（6 個文件）
-├── 03-review/             # 審核階段
-│   └── code-review-checklist.md
-└── appendix/              # 附錄
-    ├── pitfalls/          # 踩坑案例
-    ├── success-cases/     # 成功案例
-    └── prompt-cheatsheet.md
+├── *.md              # 主題參考文件
+└── prompts/          # 可執行 Prompt（含變數說明）
+    └── *.md
 ```
 
-### Templates
+### Planning References (7)
 
-| Template              | Purpose            |
-| --------------------- | ------------------ |
-| `feature-spec.md`     | 功能規格模板       |
-| `api-spec.md`         | API 規格模板       |
-| `component-spec.md`   | 元件規格模板       |
-| `database-schema.md`  | 資料庫 Schema 模板 |
-| `task-plan.md`        | 任務計畫模板       |
-| `deviation-report.md` | 偏差報告模板       |
+| File                            | Purpose         |
+| ------------------------------- | --------------- |
+| overview.md                     | 規劃流程概覽    |
+| requirement-analysis.md         | 需求分析方法    |
+| task-decomposition.md           | 任務拆解策略    |
+| tech-stack-selection.md         | 技術選型指南    |
+| architecture-design.md          | 架構設計原則    |
+| prompts/analyze-requirements.md | 需求分析 Prompt |
+| prompts/create-plan.md          | 建立計畫 Prompt |
+
+### Frontend References (13)
+
+| File                              | Purpose           |
+| --------------------------------- | ----------------- |
+| overview.md                       | 前端開發概覽      |
+| design-system.md                  | 設計系統建立      |
+| component-development.md          | 元件開發方法      |
+| component-library.md              | 元件庫規劃        |
+| routing.md                        | 路由設定          |
+| state-management.md               | 狀態管理          |
+| token-system.md                   | Design Token      |
+| documentation-guide.md            | 文件撰寫指南      |
+| prompts/create-component.md       | 建立元件 Prompt   |
+| prompts/setup-design-system.md    | 設計系統 Prompt   |
+| prompts/setup-routing.md          | 路由設定 Prompt   |
+| prompts/setup-state-management.md | 狀態管理 Prompt   |
+| prompts/setup-token-system.md     | Token 系統 Prompt |
+
+### Backend References (8)
+
+| File                    | Purpose           |
+| ----------------------- | ----------------- |
+| overview.md             | 後端開發概覽      |
+| api-design.md           | API 設計規範      |
+| database.md             | 資料庫設計        |
+| authentication.md       | 認證授權          |
+| business-logic.md       | 商業邏輯          |
+| prompts/create-model.md | 建立 Model Prompt |
+| prompts/design-api.md   | API 設計 Prompt   |
+| prompts/setup-auth.md   | 認證設定 Prompt   |
+
+### Validation References (9)
+
+| File                              | Purpose         |
+| --------------------------------- | --------------- |
+| validation-framework.md           | 驗證框架概覽    |
+| testing.md                        | 測試策略        |
+| git-workflow.md                   | Git 工作流      |
+| integration.md                    | 整合策略        |
+| prompts/bug-fixing.md             | Bug 修復 Prompt |
+| prompts/feature-implementation.md | 功能實作 Prompt |
+| prompts/git-branch-create.md      | 分支建立 Prompt |
+| prompts/git-merge-flow.md         | 合併流程 Prompt |
+| prompts/integration-test.md       | 整合測試 Prompt |
+
+### Review References (3)
+
+| File                     | Purpose           |
+| ------------------------ | ----------------- |
+| overview.md              | 審查流程概覽      |
+| code-review-checklist.md | 審查清單          |
+| prompts/review-code.md   | 程式碼審查 Prompt |
+
+### Troubleshooting References (6)
+
+| File                            | Purpose          |
+| ------------------------------- | ---------------- |
+| index.md                        | 案例索引         |
+| prompt-cheatsheet.md            | Prompt 速查表    |
+| case-01-cicd-configuration.md   | CI/CD 配置踩坑   |
+| case-02-astro5-env-variables.md | Astro 5 環境變數 |
+| case-03-vercel-api-404.md       | Vercel API 404   |
+| prompts/bug-fixing.md           | Bug 修復 Prompt  |
+
+### Templates (共用)
+
+| Template                   | Purpose             |
+| -------------------------- | ------------------- |
+| `phase-structure.md`       | 四階段流程結構定義  |
+| `prompt-variable-guide.md` | Prompt 變數使用指南 |
 
 ## OpenSpec Skills
 

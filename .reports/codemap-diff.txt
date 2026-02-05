@@ -1,37 +1,92 @@
 ================================================================================
 CODEMAP DIFF REPORT
-Generated: 2026-01-28
+Generated: 2026-02-05
+Previous Version: 2026-01-28
 ================================================================================
 
 SUMMARY
 -------
-Status: INITIAL CREATION
-Diff Percentage: 100% (no previous version)
+Status: MAJOR UPDATE (v2.1.0 architecture refactoring)
+Diff Percentage: ~55% (exceeds 30% threshold)
 User Approval: GRANTED
 
-FILES CREATED
+CHANGE DRIVERS
+--------------
+1. Skill architecture refactoring: single skill → 7 independent skills
+2. Version bump: 1.0.0 → 2.1.0
+3. Directory restructuring: references distributed to each skill
+4. marketplace.json expansion: added email, metadata, version, tags
+5. Shell scripts removed (create-component.sh, create-dbml.sh, run-tests.sh)
+6. New directories: templates/, agents/, docs/plans/
+
+FILES UPDATED
 -------------
-[NEW] codemaps/architecture.md    - Overall architecture, module relationships
-[NEW] codemaps/backend.md         - Hooks, Scripts (functional code)
-[NEW] codemaps/frontend.md        - Skills, Commands (user-facing interfaces)
-[NEW] codemaps/data.md            - JSON/YAML configs, schemas
+[UPDATED] codemaps/architecture.md  - Restructured for 7 skills, added agents/templates layers
+[UPDATED] codemaps/frontend.md      - Complete rewrite for independent skill structure
+[UPDATED] codemaps/backend.md       - Removed shell scripts, added agents section
+[UPDATED] codemaps/data.md          - Updated version, marketplace.json schema
+
+KEY CHANGES PER CODEMAP
+-----------------------
+
+architecture.md:
+  [+] 7 individual skills in Plugin Layer diagram
+  [+] agents/ directory
+  [+] templates/ directory
+  [+] docs/plans/ directory
+  [+] Skill Architecture section with trigger keywords
+  [-] Single skill entry point reference
+  [~] Version updated to 2.1.0
+
+frontend.md:
+  [+] 7 skill sections with individual reference listings
+  [+] Planning References (7 files)
+  [+] Frontend References (13 files)
+  [+] Backend References (8 files)
+  [+] Validation References (9 files)
+  [+] Review References (3 files)
+  [+] Troubleshooting References (6 files)
+  [+] Templates section (phase-structure.md, prompt-variable-guide.md)
+  [-] Single ai-coding-workflow skill reference
+  [-] Centralized reference directory structure
+  [-] Old template list (6 templates → 2 templates)
+
+backend.md:
+  [+] Agents section (detect-context.md)
+  [+] Hook Execution Flow diagram
+  [-] Skill Scripts section (create-component.sh, create-dbml.sh, run-tests.sh)
+  [~] Simplified structure overview
+
+data.md:
+  [~] marketplace.json: added email, metadata, version, tags fields
+  [~] plugin.json: version 1.0.0 → 2.1.0, added skills/agents arrays
+  [-] Removed specific line number references (fragile)
 
 STATISTICS
 ----------
-Total Files Analyzed: 76
-  - Markdown files: 68
-  - JavaScript files: 3
+Total Files Analyzed: 89
+  - Markdown files (skills/references): 53
+  - Markdown files (templates): 2
+  - Markdown files (agents): 1
+  - Markdown files (docs/plans): 2
+  - JavaScript files: 2
   - JSON configs: 4
   - YAML configs: 1
 
 Codemap Coverage:
-  - architecture.md: Project structure, module relationships, entry points
-  - backend.md: 2 hooks (sensitive-file-guard, markdown-lint), 1 script
-  - frontend.md: 1 skill (ai-coding-workflow), 10 OpenSpec skills, 10 commands
-  - data.md: 4 config files, variable system, YAML schema
+  - architecture.md: Project structure, 4-layer model, 7 skills, dependencies
+  - backend.md: 2 hooks, 1 agent, hook execution flow
+  - frontend.md: 7 skills (46 reference files), 2 templates, 10 OpenSpec skills
+  - data.md: 4 config files (v2.1.0), variable system, YAML schema
+
+Commits Since Last Update: 20+
+  - Major: skill architecture refactoring (5f801a7)
+  - Feature: independent references per skill (6 commits)
+  - Docs: prompt variable system (8 commits)
+  - Chore: version bump to 2.1.0 (2 commits)
 
 NEXT SCHEDULED UPDATE
 ---------------------
-Recommended: After significant structural changes or new modules added
+Recommended: After next significant structural change or new skill addition
 
 ================================================================================

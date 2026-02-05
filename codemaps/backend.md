@@ -1,7 +1,7 @@
 # Backend Codemap
 
-**Last Updated:** 2026-01-28
-**Scope:** Hooks, Scripts（功能性程式碼）
+**Last Updated:** 2026-02-05
+**Scope:** Hooks, Scripts, Agents（功能性程式碼）
 
 ## Overview
 
@@ -15,11 +15,8 @@ plugins/ai-coding-workflow/
 │   └── hooks/
 │       ├── sensitive-file-guard.js   # PreToolUse Hook
 │       └── markdown-lint.js          # PostToolUse Hook
-└── skills/ai-coding-workflow/
-    └── scripts/
-        ├── create-component.sh       # 元件建立腳本
-        ├── create-dbml.sh            # DBML 資料庫定義腳本
-        └── run-tests.sh              # 測試執行腳本
+└── agents/
+    └── detect-context.md             # 上下文偵測 Agent
 ```
 
 ## Hooks
@@ -45,7 +42,7 @@ stdin (JSON) → 解析 file_path → 檢查敏感模式 → exit 0 (允許) / e
 | `*.pem`, `*.key` | server.pem, private.key           |
 | `.ssh/*`         | .ssh/id_rsa                       |
 
-**Location:** `plugins/ai-coding-workflow/scripts/hooks/sensitive-file-guard.js:20-32`
+**Location:** `plugins/ai-coding-workflow/scripts/hooks/sensitive-file-guard.js`
 
 ### markdown-lint.js
 
@@ -60,64 +57,23 @@ stdin (JSON) → 解析 file_path → 檢查敏感模式 → exit 0 (允許) / e
 
 **Location:** `plugins/ai-coding-workflow/scripts/hooks/markdown-lint.js`
 
-## Skill Scripts
+## Agents
 
-位於 `plugins/ai-coding-workflow/skills/ai-coding-workflow/scripts/`
+### detect-context.md
 
-### create-component.sh
+**Type:** Agent 定義
+**Purpose:** 自動偵測專案技術棧
+**Location:** `plugins/ai-coding-workflow/agents/detect-context.md`
 
-**Purpose:** 建立 React 元件檔案結構
+**功能：**
 
-**Usage:**
+- 偵測前端框架（React, Vue, Angular, Svelte, Astro 等）
+- 偵測 UI 庫（Tailwind, Material-UI, Ant Design 等）
+- 偵測後端語言與框架
+- 偵測資料庫與 ORM 工具
+- 偵測失敗時提供 fallback 策略
 
-```bash
-./create-component.sh ComponentName
-```
-
-**生成檔案：**
-
-```
-src/components/ComponentName/
-├── ComponentName.tsx       # 主元件（含 Props interface）
-├── ComponentName.test.tsx  # 測試檔案
-└── index.ts                # 匯出入口
-```
-
-### create-dbml.sh
-
-**Purpose:** 建立 DBML 資料庫定義檔
-
-**Usage:**
-
-```bash
-./create-dbml.sh table_name
-```
-
-**生成檔案：**
-
-```
-database/table_name.dbml
-```
-
-**預設欄位：** `id` (uuid pk), `created_at`, `updated_at`
-
-### run-tests.sh
-
-**Purpose:** 自動偵測並執行測試
-
-**Usage:**
-
-```bash
-./run-tests.sh [test-pattern]
-```
-
-**支援框架：**
-
-| 專案類型         | 偵測方式                              | 執行命令         |
-| ---------------- | ------------------------------------- | ---------------- |
-| Node.js (Vitest) | `package.json` 含 vitest              | `npx vitest run` |
-| Node.js (Jest)   | `package.json` 含 jest                | `npx jest`       |
-| Python           | `requirements.txt` / `pyproject.toml` | `pytest`         |
+**呼叫時機：** 由各 skill 於 Phase 1（任務理解）自動調用。
 
 ## Hook Registration
 
@@ -149,6 +105,23 @@ Hooks 在 `plugins/ai-coding-workflow/hooks/hooks.json` 註冊：
 ```
 
 **Note:** `${CLAUDE_PLUGIN_ROOT}` 指向 `plugins/ai-coding-workflow/scripts/`
+
+## Hook Execution Flow
+
+```
+User Action (Read/Write/Edit)
+    ↓
+PreToolUse Hooks:
+    → sensitive-file-guard.js (checks file patterns)
+    → exit 0 (allow) / exit 2 (block)
+    ↓
+Tool Execution (Read/Write/Edit)
+    ↓
+PostToolUse Hooks (only Write/Edit on .md files):
+    → markdown-lint.js (validates format)
+    ↓
+File Modification Complete
+```
 
 ## Related Codemaps
 

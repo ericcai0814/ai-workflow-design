@@ -1,6 +1,6 @@
 # Data Codemap
 
-**Last Updated:** 2026-01-28
+**Last Updated:** 2026-02-05
 **Scope:** JSON/YAML 配置、Schema
 
 ## Overview
@@ -10,7 +10,7 @@
 │   └── marketplace.json          # Marketplace 定義
 ├── plugins/ai-coding-workflow/
 │   └── .claude-plugin/
-│       └── plugin.json           # Plugin 元數據 + Hooks
+│       └── plugin.json           # Plugin 元數據 (v2.1.0)
 ├── .claude/
 │   ├── settings.example.json     # 設定範本
 │   └── settings.local.json       # 本地設定（git-ignored）
@@ -28,11 +28,23 @@
 ```json
 {
   "name": "ai-coding-workflow",
-  "owner": { "name": "Eric Cai" },
+  "owner": {
+    "name": "Eric Cai",
+    "email": "d4070707@gmail.com"
+  },
+  "metadata": {
+    "description": "Eric Cai 的 Claude Code 插件集合",
+    "version": "2.1.0",
+    "pluginRoot": "./plugins/ai-coding-workflow"
+  },
   "plugins": [
     {
       "name": "ai-coding-workflow",
-      "source": "./plugins/ai-coding-workflow"
+      "source": "./plugins/ai-coding-workflow",
+      "description": "團隊標準化 AI 輔助開發工作流程",
+      "version": "2.1.0",
+      "category": "workflow",
+      "tags": ["workflow", "frontend", "backend", "planning", "code-review"]
     }
   ]
 }
@@ -41,15 +53,17 @@
 ### plugin.json
 
 **Location:** `plugins/ai-coding-workflow/.claude-plugin/plugin.json`
-**Purpose:** Plugin 元數據、Hooks 定義
+**Purpose:** Plugin 元數據、Skills、Agents 定義
 
 **Key Fields:**
-| Field | Value |
-|-------|-------|
-| `name` | ai-coding-workflow |
-| `version` | 1.0.0 |
-| `hooks.PreToolUse` | sensitive-file-guard.js |
-| `hooks.PostToolUse` | markdown-lint.js |
+
+| Field      | Value                                                                   |
+| ---------- | ----------------------------------------------------------------------- |
+| `name`     | ai-coding-workflow                                                      |
+| `version`  | 2.1.0                                                                   |
+| `skills`   | `["./skills/"]`（自動掃描 7 個獨立 skills）                             |
+| `agents`   | `["./agents/detect-context.md"]`                                        |
+| `keywords` | workflow, frontend, backend, planning, code-review, design-system, etc. |
 
 ### settings.example.json / settings.local.json
 
@@ -57,11 +71,12 @@
 **Purpose:** Claude Code 專案設定範本
 
 **Key Fields:**
-| Field | Purpose |
-|-------|---------|
+
+| Field               | Purpose        |
+| ------------------- | -------------- |
 | `permissions.allow` | 允許的工具操作 |
-| `hooks` | 專案層級 Hooks |
-| `enabledPlugins` | 啟用的 Plugins |
+| `hooks`             | 專案層級 Hooks |
+| `enabledPlugins`    | 啟用的 Plugins |
 
 **Note:** `settings.local.json` 由 `scripts/init-claude.js` 生成，包含實際路徑。
 
@@ -85,7 +100,7 @@
 
 ## Variable System
 
-定義於 `openspec/config.yaml:125-131`
+定義於 `openspec/config.yaml`
 
 | Variable           | Description                          |
 | ------------------ | ------------------------------------ |
@@ -99,7 +114,7 @@
 
 ## YAML Front Matter Schema
 
-定義於 `openspec/config.yaml:133-142`
+定義於 `openspec/config.yaml`
 
 **Required Fields:**
 
